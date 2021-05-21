@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class PasswordInput extends StatefulWidget {
   final bool isNewPasswordInput;
@@ -34,12 +34,19 @@ class _PasswordInputState extends State<PasswordInput> {
         ),
       ),
       autofillHints: [
-        this.widget.isNewPasswordInput
+        widget.isNewPasswordInput
             ? AutofillHints.newPassword
             : AutofillHints.password
       ],
       keyboardType: TextInputType.visiblePassword,
       obscureText: isTextObscured,
+      validator: (value) {
+        if (value == null || value.length < 6) {
+          return "A senha precisa ter no mínimo 6 caracteres";
+        }
+        return null;
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }
