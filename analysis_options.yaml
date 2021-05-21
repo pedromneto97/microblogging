@@ -1,0 +1,12 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude: [build/**]
+
+linter:
+  rules:
+    - prefer_relative_imports
+    - prefer_double_quotes
+    - use_named_constants
+    - prefer_const_declarations
+    - prefer_const_constructors
