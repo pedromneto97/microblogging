@@ -11,6 +11,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _formKey = GlobalKey<FormState>();
+  final _emailTextEditingController = TextEditingController();
+  final _passwordTextEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailTextEditingController.dispose();
+    _passwordTextEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +48,12 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: TextFormField(
+                          controller: _emailTextEditingController,
                           decoration: const InputDecoration(
                             labelText: "E-mail",
                             hintText: "pedromneto97@gmail.com",
                           ),
-                          autofillHints: [AutofillHints.email],
+                          autofillHints: const [AutofillHints.email],
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null ||
@@ -53,10 +63,21 @@ class _HomeState extends State<Home> {
                             }
                             return null;
                           },
+                          textInputAction: TextInputAction.next,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                       ),
-                      const PasswordInput(),
+                      PasswordInput(
+                        controller: _passwordTextEditingController,
+                        onSubmit: (_) {
+                          if (_formKey.currentState?.validate() == true) {
+                            print(
+                                "E-mail: ${_emailTextEditingController.text}");
+                            print(
+                                "Password: ${_passwordTextEditingController.text}");
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -68,7 +89,10 @@ class _HomeState extends State<Home> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState?.validate() == true) {
-                            print("Sucesso");
+                            print(
+                                "E-mail: ${_emailTextEditingController.text}");
+                            print(
+                                "Password: ${_passwordTextEditingController.text}");
                           }
                         },
                         child: Text(

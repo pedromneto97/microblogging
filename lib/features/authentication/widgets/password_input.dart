@@ -2,9 +2,13 @@ import "package:flutter/material.dart";
 
 class PasswordInput extends StatefulWidget {
   final bool isNewPasswordInput;
+  final TextEditingController controller;
+  final void Function(String value)? onSubmit;
 
   const PasswordInput({
     Key? key,
+    required this.controller,
+    this.onSubmit,
     this.isNewPasswordInput = false,
   }) : super(key: key);
 
@@ -18,6 +22,7 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       decoration: InputDecoration(
         labelText: "Senha",
         suffixIcon: IconButton(
@@ -47,6 +52,7 @@ class _PasswordInputState extends State<PasswordInput> {
         return null;
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onFieldSubmitted: widget.onSubmit,
     );
   }
 }
