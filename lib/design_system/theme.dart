@@ -42,4 +42,11 @@ final theme = ThemeData(
       minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(48)),
     ),
   ),
+  cardTheme: CardTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+    elevation: 2,
+    clipBehavior: Clip.hardEdge,
+  ),
 );
