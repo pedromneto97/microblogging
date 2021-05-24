@@ -5,6 +5,8 @@ import '../widgets/password_input.dart';
 class Home extends StatefulWidget {
   static const screenName = 'home_screen';
 
+  const Home();
+
   @override
   _HomeState createState() => _HomeState();
 }
