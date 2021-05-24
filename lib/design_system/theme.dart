@@ -11,7 +11,7 @@ final theme = ThemeData(
   accentColor: _colorScheme.secondary,
   accentColorBrightness:
       ThemeData.estimateBrightnessForColor(_colorScheme.secondary),
-  scaffoldBackgroundColor: _colorScheme.background,
+  scaffoldBackgroundColor: Colors.grey.shade50,
   bottomAppBarColor: _colorScheme.surface,
   cardColor: _colorScheme.surface,
   dividerColor: _colorScheme.onSurface.withOpacity(0.12),
