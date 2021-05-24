@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../register/register.dart';
 import '../widgets/password_input.dart';
 
 class Home extends StatefulWidget {
@@ -103,7 +104,8 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(Register.screenName),
                       child: Text(
                         'Registrar'.toUpperCase(),
                       ),
