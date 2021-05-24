@@ -38,6 +38,7 @@ final theme = ThemeData(
           borderRadius: BorderRadius.circular(24),
         ),
       ),
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
       minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(48)),
     ),
   ),
