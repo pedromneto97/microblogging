@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
   final bool isNewPasswordInput;
@@ -24,7 +24,7 @@ class _PasswordInputState extends State<PasswordInput> {
     return TextFormField(
       controller: widget.controller,
       decoration: InputDecoration(
-        labelText: "Senha",
+        labelText: 'Senha',
         suffixIcon: IconButton(
           onPressed: () {
             setState(() {
@@ -47,7 +47,7 @@ class _PasswordInputState extends State<PasswordInput> {
       obscureText: isTextObscured,
       validator: (value) {
         if (value == null || value.length < 6) {
-          return "A senha precisa ter no mínimo 6 caracteres";
+          return 'A senha precisa ter no mínimo 6 caracteres';
         }
         return null;
       },

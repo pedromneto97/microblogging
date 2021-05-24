@@ -1,9 +1,9 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "../widgets/password_input.dart";
+import '../widgets/password_input.dart';
 
 class Home extends StatefulWidget {
-  static const screenName = "home_screen";
+  static const screenName = 'home_screen';
 
   @override
   _HomeState createState() => _HomeState();
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
                   flex: 2,
                   child: Center(
                     child: Text(
-                      "SEU BLOG",
+                      'SEU BLOG',
                       //             style: Theme.of(context).textTheme.headline2,
                     ),
                   ),
@@ -50,16 +50,16 @@ class _HomeState extends State<Home> {
                         child: TextFormField(
                           controller: _emailTextEditingController,
                           decoration: const InputDecoration(
-                            labelText: "E-mail",
-                            hintText: "pedromneto97@gmail.com",
+                            labelText: 'E-mail',
+                            hintText: 'pedromneto97@gmail.com',
                           ),
                           autofillHints: const [AutofillHints.email],
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null ||
-                                !RegExp(r"^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$")
+                                !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
                                     .hasMatch(value)) {
-                              return "Insira um e-mail válido";
+                              return 'Insira um e-mail válido';
                             }
                             return null;
                           },
@@ -72,9 +72,9 @@ class _HomeState extends State<Home> {
                         onSubmit: (_) {
                           if (_formKey.currentState?.validate() == true) {
                             print(
-                                "E-mail: ${_emailTextEditingController.text}");
+                                'E-mail: ${_emailTextEditingController.text}');
                             print(
-                                "Password: ${_passwordTextEditingController.text}");
+                                'Password: ${_passwordTextEditingController.text}');
                           }
                         },
                       ),
@@ -90,20 +90,20 @@ class _HomeState extends State<Home> {
                         onPressed: () {
                           if (_formKey.currentState?.validate() == true) {
                             print(
-                                "E-mail: ${_emailTextEditingController.text}");
+                                'E-mail: ${_emailTextEditingController.text}');
                             print(
-                                "Password: ${_passwordTextEditingController.text}");
+                                'Password: ${_passwordTextEditingController.text}');
                           }
                         },
                         child: Text(
-                          "ENTRAR".toUpperCase(),
+                          'ENTRAR'.toUpperCase(),
                         ),
                       ),
                     ),
                     OutlinedButton(
                       onPressed: () {},
                       child: Text(
-                        "Registrar".toUpperCase(),
+                        'Registrar'.toUpperCase(),
                       ),
                     )
                   ],
