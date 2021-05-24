@@ -32,12 +32,12 @@ class _HomeState extends State<Home> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       'SEU BLOG',
-                      //             style: Theme.of(context).textTheme.headline2,
+                      style: Theme.of(context).textTheme.headline2,
                     ),
                   ),
                 ),
