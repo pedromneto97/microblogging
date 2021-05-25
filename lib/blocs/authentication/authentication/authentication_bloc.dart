@@ -31,6 +31,14 @@ class AuthenticationBloc
           name: event.name,
         );
         yield AuthenticationSuccessState(user: user);
+      } else if (event is LoginEvent) {
+        yield const AuthenticationInProgressState();
+        await Future.delayed(const Duration(seconds: 2), () {});
+        final user = authenticationRepository.login(
+          email: event.email,
+          password: event.password,
+        );
+        yield AuthenticationSuccessState(user: user);
       }
     } on Exception catch (e) {
       yield AuthenticationFailureState(exception: e);
