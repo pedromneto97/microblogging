@@ -25,6 +25,8 @@ class AuthenticationBloc
     try {
       if (event is RegisterEvent) {
         yield const AuthenticationInProgressState();
+        await Future.delayed(const Duration(seconds: 2), () {});
+
         final user = authenticationRepository.registerUser(
           email: event.email,
           password: event.password,
