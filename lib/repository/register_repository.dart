@@ -50,7 +50,7 @@ class AuthenticationRepository {
         .where((user) => user.email == email && user.password == password);
 
     if (filteredUsers.isEmpty) {
-      throw const UserDoesNotExists(message: 'Usuário já cadastrado');
+      throw const UserDoesNotExists(message: 'Usuário não cadastrado');
     }
 
     final user = filteredUsers.first;
