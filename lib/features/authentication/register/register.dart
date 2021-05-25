@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../blocs/authentication/authentication/authentication_bloc.dart';
+import '../../feed/feed/feed.dart';
+import '../login/login.dart';
 import '../widgets/password_input.dart';
 
 class Register extends StatefulWidget {
@@ -14,6 +18,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final _emailTextEditingController = TextEditingController();
+  final _nameTextEditingController = TextEditingController();
   final _passwordTextEditingController = TextEditingController();
 
   @override
@@ -25,63 +30,102 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    void submit() {
+      if (_formKey.currentState!.validate()) {
+        BlocProvider.of<AuthenticationBloc>(context).add(
+          RegisterEvent(
+            name: _nameTextEditingController.text,
+            password: _passwordTextEditingController.text,
+            email: _emailTextEditingController.text,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Crie sua conta'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: AutofillGroup(
-            child: Column(
-              children: [
-                Flexible(
-                  flex: 3,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 24.0,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          if (state is AuthenticationSuccessState) {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              Feed.screenName,
+              (route) => route.settings.name == Login.screenName,
+            );
+          } else if (state is AuthenticationFailureState) {
+            showBottomSheet(
+                context: context,
+                elevation: 2,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                builder: (context) {
+                  return Container(
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextFormField(
-                              controller: _emailTextEditingController,
-                              decoration: const InputDecoration(
-                                labelText: 'Nome',
-                              ),
-                              autofillHints: const [AutofillHints.name],
-                              keyboardType: TextInputType.text,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'O nome é obrigatório';
-                                }
-                                return null;
-                              },
-                              textInputAction: TextInputAction.next,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                            IconButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              icon: const Icon(Icons.close_rounded),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: TextFormField(
-                                controller: _emailTextEditingController,
+                          ],
+                        ),
+                        Icon(
+                          Icons.error,
+                          color: Theme.of(context).errorColor,
+                          size: 80,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            state.exception.message,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          }
+        },
+        child: Container(
+          margin: const EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: AutofillGroup(
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 24.0,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextFormField(
+                                controller: _nameTextEditingController,
                                 decoration: const InputDecoration(
-                                  labelText: 'E-mail',
+                                  labelText: 'Nome',
                                 ),
-                                autofillHints: const [AutofillHints.email],
-                                keyboardType: TextInputType.emailAddress,
+                                autofillHints: const [AutofillHints.name],
+                                keyboardType: TextInputType.text,
                                 validator: (value) {
-                                  if (value == null ||
-                                      !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-                                          .hasMatch(value)) {
-                                    return 'Insira um e-mail válido';
+                                  if (value == null || value.isEmpty) {
+                                    return 'O nome é obrigatório';
                                   }
                                   return null;
                                 },
@@ -89,45 +133,53 @@ class _RegisterState extends State<Register> {
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                               ),
-                            ),
-                            PasswordInput(
-                              controller: _passwordTextEditingController,
-                              isNewPasswordInput: true,
-                              onSubmit: (_) {
-                                if (_formKey.currentState?.validate() == true) {
-                                  print(
-                                      'E-mail: ${_emailTextEditingController.text}');
-                                  print(
-                                      'Password: ${_passwordTextEditingController.text}');
-                                }
-                              },
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 72.0,
-                              ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState?.validate() ==
-                                      true) {
-                                    print(
-                                        'E-mail: ${_emailTextEditingController.text}');
-                                    print(
-                                        'Password: ${_passwordTextEditingController.text}');
-                                  }
-                                },
-                                child: Text(
-                                  'REGISTRAR'.toUpperCase(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: TextFormField(
+                                  controller: _emailTextEditingController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'E-mail',
+                                  ),
+                                  autofillHints: const [AutofillHints.email],
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    if (value == null ||
+                                        !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+                                            .hasMatch(value)) {
+                                      return 'Insira um e-mail válido';
+                                    }
+                                    return null;
+                                  },
+                                  textInputAction: TextInputAction.next,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                 ),
                               ),
-                            ),
-                          ],
+                              PasswordInput(
+                                controller: _passwordTextEditingController,
+                                isNewPasswordInput: true,
+                                onSubmit: (_) => submit(),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 72.0,
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: submit,
+                                  child: Text(
+                                    'REGISTRAR'.toUpperCase(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
