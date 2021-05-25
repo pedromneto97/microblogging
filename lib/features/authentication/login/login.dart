@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../register/register.dart';
 import '../widgets/password_input.dart';
 
-class Home extends StatefulWidget {
+class Login extends StatefulWidget {
   static const screenName = 'home_screen';
 
-  const Home();
+  const Login();
 
   @override
-  _HomeState createState() => _HomeState();
+  _LoginState createState() => _LoginState();
 }
 
-class _HomeState extends State<Home> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _emailTextEditingController = TextEditingController();
   final _passwordTextEditingController = TextEditingController();
