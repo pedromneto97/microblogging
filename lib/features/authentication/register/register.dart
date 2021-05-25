@@ -165,10 +165,19 @@ class _RegisterState extends State<Register> {
                                 padding: const EdgeInsets.only(
                                   top: 72.0,
                                 ),
-                                child: ElevatedButton(
-                                  onPressed: submit,
-                                  child: Text(
-                                    'REGISTRAR'.toUpperCase(),
+                                child: BlocBuilder<AuthenticationBloc,
+                                    AuthenticationState>(
+                                  builder: (context, state) => ElevatedButton(
+                                    onPressed:
+                                        state is AuthenticationInProgressState
+                                            ? null
+                                            : submit,
+                                    child:
+                                        state is AuthenticationInProgressState
+                                            ? const CircularProgressIndicator()
+                                            : Text(
+                                                'REGISTRAR'.toUpperCase(),
+                                              ),
                                   ),
                                 ),
                               ),
