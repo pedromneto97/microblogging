@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:microblogging/features/feed/feed/feed.dart';
 
 import '../../../blocs/authentication/authentication/authentication_bloc.dart';
+import '../../feed/feed/feed.dart';
 import '../register/register.dart';
 import '../widgets/password_input.dart';
 
