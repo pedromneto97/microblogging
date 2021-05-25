@@ -18,3 +18,11 @@ class UserAlreadyExists extends Exception {
           message: message,
         );
 }
+
+class UserDoesNotExists extends Exception {
+  const UserDoesNotExists({
+    required String message,
+  }) : super(
+          message: message,
+        );
+}
