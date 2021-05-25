@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'blocs/authentication/authentication/authentication_bloc.dart';
 import 'box/user_box.dart';
@@ -14,7 +16,11 @@ import 'repository/register_repository.dart';
 import 'utils/bloc_observer.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
   Hive.registerAdapter(UserBoxAdapter());
   await Hive.openBox<UserBox>('users');
   if (kDebugMode) Bloc.observer = MyBlocObserver();
@@ -36,15 +42,19 @@ class MyApp extends StatelessWidget {
               RepositoryProvider.of<AuthenticationRepository>(context),
         ),
         lazy: false,
-        child: MaterialApp(
-          title: 'Seu blog',
-          theme: theme,
-          initialRoute: Login.screenName,
-          routes: {
-            Login.screenName: (context) => const Login(),
-            Register.screenName: (context) => const Register(),
-            Feed.screenName: (context) => const Feed(),
-          },
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) => MaterialApp(
+            title: 'Seu blog',
+            theme: theme,
+            initialRoute: state is AuthenticationSuccessState
+                ? Feed.screenName
+                : Login.screenName,
+            routes: {
+              Login.screenName: (context) => const Login(),
+              Register.screenName: (context) => const Register(),
+              Feed.screenName: (context) => const Feed(),
+            },
+          ),
         ),
       ),
     );

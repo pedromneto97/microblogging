@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../models/exceptions.dart';
@@ -12,7 +12,7 @@ part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+    extends HydratedBloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository authenticationRepository;
 
   AuthenticationBloc({
@@ -45,5 +45,33 @@ class AuthenticationBloc
     } on Exception catch (e) {
       yield AuthenticationFailureState(exception: e);
     }
+  }
+
+  @override
+  AuthenticationState? fromJson(Map<String, dynamic>? json) {
+    if (json != null) {
+      return AuthenticationSuccessState(
+        user: User(
+          email: json['email'],
+          password: json['password'],
+          name: json['email'],
+          photoUrl: json['photoUrl'],
+        ),
+      );
+    }
+    return null;
+  }
+
+  @override
+  Map<String, dynamic>? toJson(AuthenticationState state) {
+    if (state is AuthenticationSuccessState) {
+      return {
+        'name': state.user.name,
+        'email': state.user.email,
+        'password': state.user.password,
+        'photoUrl': state.user.photoUrl,
+      };
+    }
+    return null;
   }
 }
