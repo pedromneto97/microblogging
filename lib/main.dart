@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -10,11 +11,13 @@ import 'features/authentication/login/login.dart';
 import 'features/authentication/register/register.dart';
 import 'features/feed/feed/feed.dart';
 import 'repository/register_repository.dart';
+import 'utils/bloc_observer.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserBoxAdapter());
   await Hive.openBox<UserBox>('users');
+  if (kDebugMode) Bloc.observer = MyBlocObserver();
   runApp(MyApp());
 }
 
