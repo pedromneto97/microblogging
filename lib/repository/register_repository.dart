@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 import '../box/user_box.dart';
 import '../models/exceptions.dart';
@@ -28,14 +29,18 @@ class AuthenticationRepository {
     if (filteredUsers.isNotEmpty) {
       throw const UserAlreadyExists(message: 'Usuário já cadastrado');
     }
+
+    final id = const Uuid().v4();
     box.add(
       UserBox()
         ..name = name
         ..password = password
-        ..email = email,
+        ..email = email
+        ..id = id,
     );
 
     return User(
+      id: id,
       name: name,
       email: email,
       password: password,
@@ -56,6 +61,7 @@ class AuthenticationRepository {
     final user = filteredUsers.first;
 
     return User(
+      id: user.id,
       name: user.name,
       email: user.email,
       password: user.password,

@@ -12,4 +12,6 @@ class UserBox extends HiveObject {
   late String password;
   @HiveField(3)
   String? photoUrl;
+  @HiveField(5)
+  late String id;
 }

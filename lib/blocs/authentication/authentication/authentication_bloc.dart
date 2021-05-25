@@ -52,6 +52,7 @@ class AuthenticationBloc
     if (json != null) {
       return AuthenticationSuccessState(
         user: User(
+          id: json['id'],
           email: json['email'],
           password: json['password'],
           name: json['email'],
@@ -66,6 +67,7 @@ class AuthenticationBloc
   Map<String, dynamic>? toJson(AuthenticationState state) {
     if (state is AuthenticationSuccessState) {
       return {
+        'id': state.user.id,
         'name': state.user.name,
         'email': state.user.email,
         'password': state.user.password,
