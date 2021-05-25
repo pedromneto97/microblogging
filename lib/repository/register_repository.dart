@@ -41,4 +41,24 @@ class AuthenticationRepository {
       password: password,
     );
   }
+
+  User login({
+    required String email,
+    required String password,
+  }) {
+    final filteredUsers = box.values
+        .where((user) => user.email == email && user.password == password);
+
+    if (filteredUsers.isEmpty) {
+      throw const UserDoesNotExists(message: 'Usuário já cadastrado');
+    }
+
+    final user = filteredUsers.first;
+
+    return User(
+      name: user.name,
+      email: user.email,
+      password: user.password,
+    );
+  }
 }
