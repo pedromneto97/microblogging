@@ -23,4 +23,25 @@ class PostRepository {
         .take(3);
     return posts.toList();
   }
+
+  _GetPostsReturn getPosts({required int page, int pageLength = 4}) {
+    final box = Hive.box<Post>('posts');
+    final pages = box.values.length;
+    final posts =
+        box.values.skip((page - 1) * pageLength).take(pageLength).toList();
+    return _GetPostsReturn(
+      pages: pages,
+      posts: posts,
+    );
+  }
+}
+
+class _GetPostsReturn {
+  final int pages;
+  final List<Post> posts;
+
+  _GetPostsReturn({
+    required this.pages,
+    required this.posts,
+  });
 }
