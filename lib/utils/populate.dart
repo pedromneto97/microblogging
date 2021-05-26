@@ -84,9 +84,15 @@ void populateStorage() {
       dateTime: DateTime(2021, 5, 7, 14, 15),
       text:
           'habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien ',
-      user: users.elementAt(3),
+      user: users.elementAt(5),
     )
   ];
+
+  posts.sort((a, b) {
+    return -a.dateTime.difference(b.dateTime).inMilliseconds;
+  });
+
+  print(posts);
 
   postBox.addAll(posts);
 }
