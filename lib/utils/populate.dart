@@ -90,7 +90,23 @@ void populateStorage() {
           // ignore: lines_longer_than_80_chars
           'habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien ',
       user: users.elementAt(5),
-    )
+    ),
+    Post(
+      userId: users.elementAt(1).id,
+      dateTime: DateTime(2021, 03, 15, 22, 30),
+      text:
+          // ignore: lines_longer_than_80_chars
+          'habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper',
+      user: users.elementAt(1),
+    ),
+    Post(
+      userId: users.elementAt(3).id,
+      dateTime: DateTime(2021, 12, 25, 22, 30),
+      text:
+          // ignore: lines_longer_than_80_chars
+          'pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu',
+      user: users.elementAt(3),
+    ),
   ];
 
   posts.sort((a, b) {
