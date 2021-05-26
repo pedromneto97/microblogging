@@ -1,20 +1,25 @@
-import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
-class User extends Equatable {
-  final String id;
-  final String name;
-  final String email;
-  final String password;
-  final String? photoUrl;
+part 'user.g.dart';
 
-  const User({
-    required this.id,
+@HiveType(typeId: 1)
+class User extends HiveObject {
+  @HiveField(0)
+  late String name;
+  @HiveField(1)
+  late String email;
+  @HiveField(2)
+  late String password;
+  @HiveField(3)
+  String? photoUrl;
+  @HiveField(5)
+  late String id;
+
+  User({
     required this.name,
     required this.email,
     required this.password,
+    required this.id,
     this.photoUrl,
   });
-
-  @override
-  List<String?> get props => [name, email, password, photoUrl];
 }
