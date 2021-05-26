@@ -55,7 +55,7 @@ class AuthenticationBloc
           id: json['id'],
           email: json['email'],
           password: json['password'],
-          name: json['email'],
+          name: json['name'],
           photoUrl: json['photoUrl'],
         ),
       );
