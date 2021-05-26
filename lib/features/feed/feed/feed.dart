@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../repository/post_repository.dart';
 import '../../../widgets/post.dart';
+import '../bloc/feed/feed_bloc.dart';
 
 class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
@@ -21,12 +22,29 @@ class Feed extends StatelessWidget {
                   ),
             ),
           ),
-          ...PostRepository()
-              .getFriendsPosts()
-              .map(
-                (e) => PostCard(post: e),
-              )
-              .toList()
+          BlocBuilder<FeedBloc, FeedState>(builder: (context, state) {
+            print(state);
+            if (state is LoadingFeedState) {
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (state is SuccessFeedState) {
+              return Column(
+                children: state.posts
+                    .map(
+                      (post) => PostCard(post: post),
+                    )
+                    .toList(),
+              );
+            }
+            if (state is InitialFeedState) {
+              BlocProvider.of<FeedBloc>(context).add(const FeedEventGet());
+            }
+            return Container();
+          }),
         ],
       ),
     );
