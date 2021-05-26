@@ -17,6 +17,7 @@ import 'models/post.dart';
 import 'models/user.dart';
 import 'repository/register_repository.dart';
 import 'utils/bloc_observer.dart';
+import 'utils/populate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,8 @@ void main() async {
     ),
     initializeDateFormatting(),
   ]);
+
+  populateStorage();
 
   if (kDebugMode) Bloc.observer = MyBlocObserver();
 
