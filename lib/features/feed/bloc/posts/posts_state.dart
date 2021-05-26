@@ -19,13 +19,13 @@ class InProgressPostsState extends PostsState {
   List<Object?> get props => const [];
 }
 
-class SuccessPostState extends PostsState implements MergeWith {
+class SuccessPostsState extends PostsState implements MergeWith {
   final List<Post> posts;
   final int page;
   final int pages;
   final bool isLoadingNextPage;
 
-  SuccessPostState({
+  SuccessPostsState({
     required this.posts,
     required this.pages,
     this.page = 1,
@@ -33,13 +33,13 @@ class SuccessPostState extends PostsState implements MergeWith {
   });
 
   @override
-  SuccessPostState mergeWith({
+  SuccessPostsState mergeWith({
     List<Post>? posts,
     int? pages,
     int? page,
     bool? isLoadingNextPage,
   }) =>
-      SuccessPostState(
+      SuccessPostsState(
         posts: posts != null ? [...this.posts, ...posts] : this.posts,
         pages: pages ?? this.pages,
         page: page ?? this.page,

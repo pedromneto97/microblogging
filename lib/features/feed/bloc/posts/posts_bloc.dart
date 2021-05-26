@@ -28,12 +28,12 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         () => postRepository.getPosts(page: 1),
       );
 
-      yield SuccessPostState(
+      yield SuccessPostsState(
         posts: response.posts,
         pages: response.pages,
       );
-    } else if (event is PostsEventGetNextPage && state is SuccessPostState) {
-      yield (state as SuccessPostState).mergeWith(
+    } else if (event is PostsEventGetNextPage && state is SuccessPostsState) {
+      yield (state as SuccessPostsState).mergeWith(
         isLoadingNextPage: true,
       );
 
@@ -42,7 +42,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         () => postRepository.getPosts(page: event.page),
       );
 
-      yield (state as SuccessPostState).mergeWith(
+      yield (state as SuccessPostsState).mergeWith(
         posts: response.posts,
         pages: response.pages,
         isLoadingNextPage: false,
