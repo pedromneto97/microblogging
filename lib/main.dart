@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -28,6 +29,7 @@ void main() async {
   await Hive.openBox<User>('users');
   if (kDebugMode) Bloc.observer = MyBlocObserver();
   Intl.defaultLocale = 'pt_BR';
+  await initializeDateFormatting();
   runApp(MyApp());
 }
 
