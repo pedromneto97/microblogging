@@ -60,14 +60,14 @@ void populateStorage() {
     ),
     Post(
       userId: users.elementAt(0).id,
-      dateTime: DateTime(2021, 5, 24),
+      dateTime: DateTime(2021, 5, 24, 17, 35),
       text:
           'faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis',
       user: users.elementAt(0),
     ),
     Post(
       userId: users.elementAt(2).id,
-      dateTime: DateTime(2021, 5, 24),
+      dateTime: DateTime(2021, 5, 24, 15, 40),
       text:
           'faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis',
       user: users.elementAt(2),
@@ -81,7 +81,7 @@ void populateStorage() {
     ),
     Post(
       userId: users.elementAt(5).id,
-      dateTime: DateTime.now(),
+      dateTime: DateTime(2021, 5, 7, 14, 15),
       text:
           'habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien ',
       user: users.elementAt(3),
