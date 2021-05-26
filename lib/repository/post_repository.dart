@@ -26,7 +26,7 @@ class PostRepository {
 
   _GetPostsReturn getPosts({required int page, int pageLength = 4}) {
     final box = Hive.box<Post>('posts');
-    final pages = box.values.length;
+    final pages = (box.values.length / pageLength).ceil();
     final posts =
         box.values.skip((page - 1) * pageLength).take(pageLength).toList();
     return _GetPostsReturn(
