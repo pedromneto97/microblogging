@@ -6,13 +6,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:microblogging/features/feed/bottom_tab_container.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/authentication/authentication/authentication_bloc.dart';
 import 'design_system/theme.dart';
 import 'features/authentication/login/login.dart';
 import 'features/authentication/register/register.dart';
-import 'features/feed/feed/feed.dart';
 import 'models/post.dart';
 import 'models/user.dart';
 import 'repository/register_repository.dart';
@@ -65,12 +65,13 @@ class MyApp extends StatelessWidget {
             title: 'Seu blog',
             theme: theme,
             initialRoute: state is AuthenticationSuccessState
-                ? Feed.screenName
+                ? BottomTabContainer.screenName
                 : Login.screenName,
             routes: {
               Login.screenName: (context) => const Login(),
               Register.screenName: (context) => const Register(),
-              Feed.screenName: (context) => const Feed(),
+              BottomTabContainer.screenName: (context) =>
+                  const BottomTabContainer(),
             },
           ),
         ),
