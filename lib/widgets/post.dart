@@ -20,7 +20,7 @@ class PostCard extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: 144,
+        height: 160,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
