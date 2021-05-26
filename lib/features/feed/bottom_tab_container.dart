@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/authentication/authentication/authentication_bloc.dart';
 import '../../repository/post_repository.dart';
 import 'bloc/feed/feed_bloc.dart';
+import 'bloc/posts/posts_bloc.dart';
 import 'feed/feed.dart';
+import 'posts/posts.dart';
 
 class BottomTabContainer extends StatefulWidget {
   static const screenName = 'bottom_tab';
@@ -14,6 +16,13 @@ class BottomTabContainer extends StatefulWidget {
   @override
   _BottomTabContainerState createState() => _BottomTabContainerState();
 }
+
+const _items = [
+  Feed(),
+  Posts(),
+  CircularProgressIndicator(),
+  CircularProgressIndicator(),
+];
 
 class _BottomTabContainerState extends State<BottomTabContainer> {
   int index = 0;
@@ -31,11 +40,19 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
     return RepositoryProvider(
       create: (context) => PostRepository(),
       lazy: false,
-      child: BlocProvider(
-        create: (context) => FeedBloc(
-          postRepository: RepositoryProvider.of<PostRepository>(context),
-        ),
-        lazy: false,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => FeedBloc(
+              postRepository: RepositoryProvider.of<PostRepository>(context),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => PostsBloc(
+              postRepository: RepositoryProvider.of<PostRepository>(context),
+            ),
+          ),
+        ],
         child: Scaffold(
           appBar: AppBar(
             title: BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -44,7 +61,7 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
               ),
             ),
           ),
-          body: const Feed(),
+          body: _items.elementAt(index),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
             items: <BottomNavigationBarItem>[
@@ -54,8 +71,8 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
                 backgroundColor: Theme.of(context).primaryColor,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.business),
-                label: 'Business',
+                icon: const Icon(Icons.feed),
+                label: 'Posts',
                 backgroundColor: Theme.of(context).primaryColor,
               ),
               BottomNavigationBarItem(
