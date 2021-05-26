@@ -1,4 +1,5 @@
 # microblogging
+[![Flutter](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml/badge.svg?branch=master)](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml)
 
 A microblogging app
 
