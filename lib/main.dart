@@ -21,15 +21,24 @@ import 'utils/bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getTemporaryDirectory(),
-  );
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(PostAdapter());
-  await Hive.openBox<User>('users');
-  if (kDebugMode) Bloc.observer = MyBlocObserver();
   Intl.defaultLocale = 'pt_BR';
-  await initializeDateFormatting();
+  await Future.wait([
+    Hive.openBox<User>('users'),
+    Hive.openBox<Post>('posts'),
+    getTemporaryDirectory().then(
+      (storage) => HydratedStorage.build(
+        storageDirectory: storage,
+      ).then(
+        (hydrateStorage) => (HydratedBloc.storage = hydrateStorage),
+      ),
+    ),
+    initializeDateFormatting(),
+  ]);
+
+  if (kDebugMode) Bloc.observer = MyBlocObserver();
+
   runApp(MyApp());
 }
 
