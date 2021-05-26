@@ -66,14 +66,16 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
             currentIndex: index,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: const Icon(Icons.home),
+                icon: const Icon(Icons.home_outlined),
                 label: 'Home',
                 backgroundColor: Theme.of(context).primaryColor,
+                activeIcon: const Icon(Icons.home_rounded),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.feed),
+                icon: const Icon(Icons.feed_outlined),
                 label: 'Posts',
                 backgroundColor: Theme.of(context).primaryColor,
+                activeIcon: const Icon(Icons.feed_rounded),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.school),
