@@ -55,6 +55,7 @@ void populateStorage() {
       userId: users.elementAt(5).id,
       dateTime: DateTime(2021, 4, 27),
       text:
+          // ignore: lines_longer_than_80_chars
           'neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitaee',
       user: users.elementAt(5),
     ),
@@ -62,6 +63,7 @@ void populateStorage() {
       userId: users.elementAt(0).id,
       dateTime: DateTime(2021, 5, 24, 17, 35),
       text:
+          // ignore: lines_longer_than_80_chars
           'faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis',
       user: users.elementAt(0),
     ),
@@ -69,6 +71,7 @@ void populateStorage() {
       userId: users.elementAt(2).id,
       dateTime: DateTime(2021, 5, 24, 15, 40),
       text:
+          // ignore: lines_longer_than_80_chars
           'faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis',
       user: users.elementAt(2),
     ),
@@ -76,6 +79,7 @@ void populateStorage() {
       userId: users.elementAt(3).id,
       dateTime: DateTime.now(),
       text:
+          // ignore: lines_longer_than_80_chars
           'sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac',
       user: users.elementAt(3),
     ),
@@ -83,6 +87,7 @@ void populateStorage() {
       userId: users.elementAt(5).id,
       dateTime: DateTime(2021, 5, 7, 14, 15),
       text:
+          // ignore: lines_longer_than_80_chars
           'habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien ',
       user: users.elementAt(5),
     )
