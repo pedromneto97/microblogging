@@ -1,12 +1,11 @@
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-import '../box/user_box.dart';
 import '../models/exceptions.dart';
 import '../models/user.dart';
 
 class AuthenticationRepository {
-  final Box<UserBox> box;
+  final Box<User> box;
 
   const AuthenticationRepository._({
     required this.box,
@@ -14,7 +13,7 @@ class AuthenticationRepository {
 
   static AuthenticationRepository? _instance;
 
-  factory AuthenticationRepository({required Box<UserBox> box}) {
+  factory AuthenticationRepository({required Box<User> box}) {
     _instance ??= AuthenticationRepository._(box: box);
     return _instance as AuthenticationRepository;
   }
@@ -31,20 +30,15 @@ class AuthenticationRepository {
     }
 
     final id = const Uuid().v4();
-    box.add(
-      UserBox()
-        ..name = name
-        ..password = password
-        ..email = email
-        ..id = id,
-    );
-
-    return User(
+    final user = User(
       id: id,
       name: name,
       email: email,
       password: password,
     );
+    box.add(user);
+
+    return user;
   }
 
   User login({
@@ -58,13 +52,6 @@ class AuthenticationRepository {
       throw const UserDoesNotExists(message: 'Usuário não cadastrado');
     }
 
-    final user = filteredUsers.first;
-
-    return User(
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    );
+    return filteredUsers.first;
   }
 }

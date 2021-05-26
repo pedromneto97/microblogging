@@ -4,14 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/authentication/authentication/authentication_bloc.dart';
-import 'box/user_box.dart';
 import 'design_system/theme.dart';
 import 'features/authentication/login/login.dart';
 import 'features/authentication/register/register.dart';
 import 'features/feed/feed/feed.dart';
+import 'models/post.dart';
+import 'models/user.dart';
 import 'repository/register_repository.dart';
 import 'utils/bloc_observer.dart';
 
@@ -21,9 +23,11 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );
-  Hive.registerAdapter(UserBoxAdapter());
-  await Hive.openBox<UserBox>('users');
+  Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(PostAdapter());
+  await Hive.openBox<User>('users');
   if (kDebugMode) Bloc.observer = MyBlocObserver();
+  Intl.defaultLocale = 'pt_BR';
   runApp(MyApp());
 }
 
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => AuthenticationRepository(
-        box: Hive.box<UserBox>('users'),
+        box: Hive.box<User>('users'),
       ),
       lazy: false,
       child: BlocProvider(
