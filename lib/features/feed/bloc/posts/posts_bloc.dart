@@ -44,6 +44,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
       yield (state as SuccessPostsState).mergeWith(
         posts: response.posts,
+        page: event.page,
         pages: response.pages,
         isLoadingNextPage: false,
       );
