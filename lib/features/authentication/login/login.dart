@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/authentication/authentication/authentication_bloc.dart';
-import '../../feed/feed/feed.dart';
+import '../../feed/bottom_tab_container.dart';
 import '../register/register.dart';
 import '../widgets/password_input.dart';
 
@@ -45,8 +45,8 @@ class _LoginState extends State<Login> {
         listener: (context, state) {
           if (state is AuthenticationSuccessState) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-              Feed.screenName,
-              (route) => route.settings.name == Login.screenName,
+              BottomTabContainer.screenName,
+              (route) => route.settings.name == '/',
             );
           } else if (state is AuthenticationFailureState) {
             showBottomSheet(

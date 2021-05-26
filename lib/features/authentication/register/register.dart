@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/authentication/authentication/authentication_bloc.dart';
-import '../../feed/feed/feed.dart';
-import '../login/login.dart';
+import '../../feed/bottom_tab_container.dart';
 import '../widgets/password_input.dart';
 
 class Register extends StatefulWidget {
@@ -51,8 +50,8 @@ class _RegisterState extends State<Register> {
         listener: (context, state) {
           if (state is AuthenticationSuccessState) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-              Feed.screenName,
-              (route) => route.settings.name == Login.screenName,
+              BottomTabContainer.screenName,
+              (route) => route.settings.name == '/',
             );
           } else if (state is AuthenticationFailureState) {
             showBottomSheet(
