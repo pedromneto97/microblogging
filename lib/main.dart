@@ -6,13 +6,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:microblogging/features/feed/bottom_tab_container.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/authentication/authentication/authentication_bloc.dart';
 import 'design_system/theme.dart';
 import 'features/authentication/login/login.dart';
 import 'features/authentication/register/register.dart';
+import 'features/feed/bottom_tab_container.dart';
 import 'models/post.dart';
 import 'models/user.dart';
 import 'repository/register_repository.dart';
