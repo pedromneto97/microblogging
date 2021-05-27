@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 
 import '../../../../models/post.dart';
 import '../../../../repository/post_repository.dart';
-import '../../../../utils/class_utils.dart';
 
 part 'posts_event.dart';
 part 'posts_state.dart';
