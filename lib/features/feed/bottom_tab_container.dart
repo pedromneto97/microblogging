@@ -7,6 +7,7 @@ import '../../repository/news_repository.dart';
 import '../../repository/post_repository.dart';
 import '../../utils/http_helper.dart';
 import 'bloc/feed/feed_bloc.dart';
+import 'bloc/news/news_bloc.dart';
 import 'bloc/posts/posts_bloc.dart';
 import 'feed/feed.dart';
 import 'news/news.dart';
@@ -65,6 +66,11 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
           BlocProvider(
             create: (context) => PostsBloc(
               postRepository: RepositoryProvider.of<PostRepository>(context),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => NewsBloc(
+              newsRepository: RepositoryProvider.of<NewsRepository>(context),
             ),
           ),
         ],
