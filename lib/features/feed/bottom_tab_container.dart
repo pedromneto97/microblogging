@@ -73,7 +73,7 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
             title: BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) => Text(
                 index == 0
-                    ? 'Bem vindo'
+                    ? 'Bem vindo '
                         '${(state as AuthenticationSuccessState).user.name}'
                     : _titles.elementAt(index),
               ),
