@@ -4,7 +4,7 @@ abstract class Exception extends Equatable {
   final String message;
 
   const Exception({
-    required this.message,
+    this.message = '',
   });
 
   @override
@@ -25,4 +25,16 @@ class UserDoesNotExists extends Exception {
   }) : super(
           message: message,
         );
+}
+
+class BadRequest extends Exception {
+  const BadRequest();
+}
+
+class ServerError extends Exception {
+  const ServerError();
+}
+
+class NoInternet extends Exception {
+  const NoInternet();
 }
