@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:microblogging/models/exceptions.dart';
 
+import '../../../../models/exceptions.dart';
 import '../../../../models/post.dart';
 import '../../../../repository/news_repository.dart';
 
@@ -27,7 +27,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         yield SuccessNewsState(news: news);
       } on MyException catch (e) {
         yield FailureNewsState(exception: e);
-      } on Exception catch (e) {
+      } on Exception catch (_) {
         yield const FailureNewsState();
       }
     }
