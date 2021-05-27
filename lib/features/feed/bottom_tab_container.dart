@@ -108,9 +108,10 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
                 activeIcon: const Icon(Icons.feed_rounded),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.settings),
-                label: 'Settings',
+                icon: const Icon(Icons.settings_outlined),
+                label: 'Menu',
                 backgroundColor: Theme.of(context).primaryColor,
+                activeIcon: const Icon(Icons.settings_rounded),
               ),
             ],
             onTap: onPressBottomTab,
