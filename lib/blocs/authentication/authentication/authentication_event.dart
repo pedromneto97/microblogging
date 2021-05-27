@@ -32,3 +32,10 @@ class LoginEvent extends AuthenticationEvent {
   @override
   List<String> get props => [email, password];
 }
+
+class LogoutEvent extends AuthenticationEvent {
+  const LogoutEvent();
+
+  @override
+  List<dynamic> get props => const [];
+}

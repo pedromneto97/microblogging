@@ -41,6 +41,9 @@ class AuthenticationBloc
           password: event.password,
         );
         yield AuthenticationSuccessState(user: user);
+      } else if (event is LogoutEvent) {
+        await Future.delayed(const Duration(seconds: 1), () {});
+        yield const InitialAuthenticationState();
       }
     } on MyException catch (e) {
       yield AuthenticationFailureState(exception: e);
