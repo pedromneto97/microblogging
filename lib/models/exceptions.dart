@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Exception extends Equatable {
+abstract class MyException extends Equatable implements Exception {
   final String message;
 
-  const Exception({
+  const MyException({
     this.message = '',
   });
 
@@ -11,7 +11,7 @@ abstract class Exception extends Equatable {
   List<String> get props => [message];
 }
 
-class UserAlreadyExists extends Exception {
+class UserAlreadyExists extends MyException {
   const UserAlreadyExists({
     required String message,
   }) : super(
@@ -19,7 +19,7 @@ class UserAlreadyExists extends Exception {
         );
 }
 
-class UserDoesNotExists extends Exception {
+class UserDoesNotExists extends MyException {
   const UserDoesNotExists({
     required String message,
   }) : super(
@@ -27,14 +27,14 @@ class UserDoesNotExists extends Exception {
         );
 }
 
-class BadRequest extends Exception {
+class BadRequest extends MyException {
   const BadRequest();
 }
 
-class ServerError extends Exception {
+class ServerError extends MyException {
   const ServerError();
 }
 
-class NoInternet extends Exception {
+class NoInternet extends MyException {
   const NoInternet();
 }

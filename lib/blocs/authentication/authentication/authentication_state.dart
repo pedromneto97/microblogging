@@ -32,7 +32,7 @@ class AuthenticationSuccessState extends AuthenticationState {
 }
 
 class AuthenticationFailureState extends AuthenticationState {
-  final Exception exception;
+  final MyException exception;
 
   const AuthenticationFailureState({
     required this.exception,

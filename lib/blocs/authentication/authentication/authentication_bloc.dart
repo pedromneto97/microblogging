@@ -42,7 +42,7 @@ class AuthenticationBloc
         );
         yield AuthenticationSuccessState(user: user);
       }
-    } on Exception catch (e) {
+    } on MyException catch (e) {
       yield AuthenticationFailureState(exception: e);
     }
   }
