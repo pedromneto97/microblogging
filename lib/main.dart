@@ -12,7 +12,7 @@ import 'blocs/authentication/authentication/authentication_bloc.dart';
 import 'design_system/theme.dart';
 import 'features/authentication/login/login.dart';
 import 'features/authentication/register/register.dart';
-import 'features/feed/bottom_tab_container.dart';
+import 'features/bottom_tab/bottom_tab_container.dart';
 import 'models/post.dart';
 import 'models/user.dart';
 import 'repository/authentication_repository.dart';
