@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/authentication/authentication/authentication_bloc.dart';
-import '../../authentication/login/login.dart';
+import '../authentication/login/login.dart';
 import 'widgets/menu_header.dart';
 import 'widgets/menu_tile.dart';
 

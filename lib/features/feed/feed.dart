@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/post.dart';
-import '../bloc/feed/feed_bloc.dart';
+import '../bottom_tab/bloc/feed/feed_bloc.dart';
 
 class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
