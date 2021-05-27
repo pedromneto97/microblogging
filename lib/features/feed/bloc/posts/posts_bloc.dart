@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:microblogging/models/post.dart';
-import 'package:microblogging/utils/class_utils.dart';
 
+import '../../../../models/post.dart';
 import '../../../../repository/post_repository.dart';
+import '../../../../utils/class_utils.dart';
 
 part 'posts_event.dart';
 part 'posts_state.dart';
