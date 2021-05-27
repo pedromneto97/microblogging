@@ -77,7 +77,8 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
             title: BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) => Text(
                 index == 0
-                    ? 'Bem vindo ${(state as AuthenticationSuccessState).user.name}!'
+                    ? 'Bem vindo'
+                        '${(state as AuthenticationSuccessState).user.name}'
                     : _titles.elementAt(index),
               ),
             ),
@@ -88,19 +89,19 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: const Icon(Icons.home_outlined),
-                label: 'Home',
+                label: 'Inicio',
                 backgroundColor: Theme.of(context).primaryColor,
                 activeIcon: const Icon(Icons.home_rounded),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.whatshot_outlined),
-                label: 'Posts',
+                label: 'Postagens',
                 backgroundColor: Theme.of(context).primaryColor,
                 activeIcon: const Icon(Icons.whatshot_rounded),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.feed_outlined),
-                label: 'School',
+                label: 'Novidades',
                 backgroundColor: Theme.of(context).primaryColor,
                 activeIcon: const Icon(Icons.feed_rounded),
               ),
