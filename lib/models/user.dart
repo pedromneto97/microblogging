@@ -5,11 +5,11 @@ part 'user.g.dart';
 @HiveType(typeId: 1)
 class User extends HiveObject {
   @HiveField(0)
-  late String name;
+  String name;
   @HiveField(1)
-  late String email;
+  String? email;
   @HiveField(2)
-  late String password;
+  String? password;
   @HiveField(3)
   String? photoUrl;
   @HiveField(5)
@@ -17,8 +17,8 @@ class User extends HiveObject {
 
   User({
     required this.name,
-    required this.email,
-    required this.password,
+    this.email,
+    this.password,
     required this.id,
     this.photoUrl,
   });
