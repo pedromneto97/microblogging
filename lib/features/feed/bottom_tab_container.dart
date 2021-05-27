@@ -10,6 +10,7 @@ import 'bloc/feed/feed_bloc.dart';
 import 'bloc/news/news_bloc.dart';
 import 'bloc/posts/posts_bloc.dart';
 import 'feed/feed.dart';
+import 'menu/menu.dart';
 import 'news/news.dart';
 import 'posts/posts.dart';
 
@@ -26,7 +27,7 @@ const _items = [
   Feed(),
   Posts(),
   News(),
-  CircularProgressIndicator(),
+  Menu(),
 ];
 
 const _titles = ['', 'O que as pessoas andam vendo', 'Últimas notícias', ''];
