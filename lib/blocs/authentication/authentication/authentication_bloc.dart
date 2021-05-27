@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../models/exceptions.dart';
 import '../../../models/user.dart';
-import '../../../repository/register_repository.dart';
+import '../../../repository/authentication_repository.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

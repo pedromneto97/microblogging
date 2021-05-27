@@ -15,7 +15,7 @@ import 'features/authentication/register/register.dart';
 import 'features/feed/bottom_tab_container.dart';
 import 'models/post.dart';
 import 'models/user.dart';
-import 'repository/register_repository.dart';
+import 'repository/authentication_repository.dart';
 import 'utils/bloc_observer.dart';
 import 'utils/populate.dart';
 
