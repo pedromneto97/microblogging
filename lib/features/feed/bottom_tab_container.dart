@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 
 import '../../blocs/authentication/authentication/authentication_bloc.dart';
+import '../../repository/news_repository.dart';
 import '../../repository/post_repository.dart';
+import '../../utils/http_helper.dart';
 import 'bloc/feed/feed_bloc.dart';
 import 'bloc/posts/posts_bloc.dart';
 import 'feed/feed.dart';
+import 'news/news.dart';
 import 'posts/posts.dart';
 
 class BottomTabContainer extends StatefulWidget {
@@ -20,8 +24,14 @@ class BottomTabContainer extends StatefulWidget {
 const _items = [
   Feed(),
   Posts(),
+  News(),
   CircularProgressIndicator(),
-  CircularProgressIndicator(),
+];
+
+const _titles = [
+  '',
+  'O que as pessoas andam vendo',
+  'Últimas notícias',
 ];
 
 class _BottomTabContainerState extends State<BottomTabContainer> {
@@ -37,9 +47,18 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => PostRepository(),
-      lazy: false,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => PostRepository(),
+          lazy: false,
+        ),
+        RepositoryProvider(
+          create: (context) =>
+              NewsRepository(httpHelper: HttpHelper(client: Client())),
+          lazy: false,
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -57,7 +76,9 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
           appBar: AppBar(
             title: BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) => Text(
-                'Bem vindo ${(state as AuthenticationSuccessState).user.name}!',
+                index == 0
+                    ? 'Bem vindo ${(state as AuthenticationSuccessState).user.name}!'
+                    : _titles.elementAt(index),
               ),
             ),
           ),
@@ -72,15 +93,16 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
                 activeIcon: const Icon(Icons.home_rounded),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.feed_outlined),
+                icon: const Icon(Icons.whatshot_outlined),
                 label: 'Posts',
                 backgroundColor: Theme.of(context).primaryColor,
-                activeIcon: const Icon(Icons.feed_rounded),
+                activeIcon: const Icon(Icons.whatshot_rounded),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.school),
+                icon: const Icon(Icons.feed_outlined),
                 label: 'School',
                 backgroundColor: Theme.of(context).primaryColor,
+                activeIcon: const Icon(Icons.feed_rounded),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.settings),
