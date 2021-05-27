@@ -28,11 +28,7 @@ const _items = [
   CircularProgressIndicator(),
 ];
 
-const _titles = [
-  '',
-  'O que as pessoas andam vendo',
-  'Últimas notícias',
-];
+const _titles = ['', 'O que as pessoas andam vendo', 'Últimas notícias', ''];
 
 class _BottomTabContainerState extends State<BottomTabContainer> {
   int index = 0;
