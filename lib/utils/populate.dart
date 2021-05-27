@@ -12,38 +12,26 @@ void populateStorage() {
   final users = [
     User(
       name: 'Renato',
-      email: 'renato@exemplo.com',
-      password: '123456',
       id: '86985094-91f6-4a20-8f0d-732360565581',
     ),
     User(
       name: 'Roberto',
-      email: 'roberto@exemplo.com',
-      password: '123456',
       id: 'fc4b2a85-4bbb-49ec-8adc-a68c5755647d',
     ),
     User(
       name: 'Luciane',
-      email: 'lu@exemplo.com',
-      password: '123456',
       id: '9edd2a54-2025-45dc-a887-7bfb21787e76',
     ),
     User(
       name: 'Iraci',
-      email: 'iraci@exemplo.com',
-      password: '123456',
       id: '3a2f4834-368a-45a5-9fb0-8074ba6ad264',
     ),
     User(
       name: 'Pedro',
-      email: 'pedro@exemplo.com',
-      password: '123456',
       id: 'ff57ef95-8b06-406e-a3d3-16a64a48497a',
     ),
     User(
       name: 'Marieli',
-      email: 'marieli@exemplo.com',
-      password: '123456',
       id: 'f63096f3-9e8a-472c-a2fb-2f663a68f552',
     ),
   ];
