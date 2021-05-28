@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/authentication/authentication/authentication_bloc.dart';
 import '../authentication/login/login.dart';
+import '../posts/my_posts.dart';
 import 'widgets/menu_header.dart';
 import 'widgets/menu_tile.dart';
 
@@ -20,6 +21,18 @@ class Menu extends StatelessWidget {
             thickness: 1,
           ),
           MenuTile(
+            icon: Icons.feed_rounded,
+            label: 'Meus Posts',
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                MyPosts.screenName,
+              );
+            },
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          MenuTile(
             icon: Icons.logout_rounded,
             label: 'Sair',
             onTap: () {
@@ -31,6 +44,9 @@ class Menu extends StatelessWidget {
                 const LogoutEvent(),
               );
             },
+          ),
+          const Divider(
+            thickness: 1,
           ),
         ],
       ),

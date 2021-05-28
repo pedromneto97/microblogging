@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:microblogging/features/posts/my_posts.dart';
 import 'package:microblogging/repository/post_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
               Register.screenName: (context) => const Register(),
               BottomTabContainer.screenName: (context) =>
                   const BottomTabContainer(),
+              MyPosts.screenName: (context) => const MyPosts(),
             },
           ),
         ),
