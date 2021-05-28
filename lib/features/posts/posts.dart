@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../widgets/post.dart';
-import '../../blocs/posts/posts_bloc.dart';
+import 'widgets/post_list_view.dart';
 
 class Posts extends StatelessWidget {
   const Posts();
@@ -22,55 +20,7 @@ class Posts extends StatelessWidget {
                   ),
             ),
           ),
-          NotificationListener<ScrollNotification>(
-            onNotification: (notification) {
-              final state = BlocProvider.of<PostsBloc>(context).state;
-              if (notification.metrics.extentAfter < 20 &&
-                  state is SuccessPostsState &&
-                  !state.isLoadingNextPage &&
-                  state.page < state.pages) {
-                BlocProvider.of<PostsBloc>(context).add(
-                  PostsEventGetNextPage(page: state.page + 1),
-                );
-              }
-              return true;
-            },
-            child: Expanded(
-              child: BlocBuilder<PostsBloc, PostsState>(
-                builder: (context, state) {
-                  if (state is InitialPostsState) {
-                    BlocProvider.of<PostsBloc>(context)
-                        .add(const PostsEventGet());
-                  }
-                  if (state is InProgressPostsState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (state is SuccessPostsState) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) {
-                        if (state.isLoadingNextPage &&
-                            index == state.posts.length) {
-                          return const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        }
-                        return PostCard(post: state.posts[index]);
-                      },
-                      itemCount: state.isLoadingNextPage
-                          ? state.posts.length + 1
-                          : state.posts.length,
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            ),
-          ),
+          const PostListView(),
         ],
       ),
     );
