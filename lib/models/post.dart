@@ -13,7 +13,7 @@ class Post extends HiveObject {
   @HiveField(1)
   final DateTime dateTime;
   @HiveField(2)
-  final String text;
+  String text;
 
   @HiveField(3)
   final User user;
