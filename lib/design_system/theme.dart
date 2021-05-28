@@ -49,4 +49,7 @@ final theme = ThemeData(
     elevation: 2,
     clipBehavior: Clip.hardEdge,
   ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
+  ),
 );
