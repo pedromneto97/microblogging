@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/posts/posts_bloc.dart';
+import '../../../widgets/alert_widget.dart';
 import '../../../widgets/post.dart';
 
 class PostListView extends StatelessWidget {
@@ -44,6 +45,12 @@ class PostListView extends StatelessWidget {
               );
             }
             if (state is SuccessPostsState) {
+              if (state.posts.isEmpty) {
+                return const AlertWidget(
+                  iconColor: Colors.orange,
+                  text: 'Ops, parece que não há nenhuma publicação',
+                );
+              }
               return ListView.builder(
                 itemBuilder: (context, index) {
                   if (state.isLoadingNextPage && index == state.posts.length) {
