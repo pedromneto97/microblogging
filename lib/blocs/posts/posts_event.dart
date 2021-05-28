@@ -6,16 +6,24 @@ abstract class PostsEvent extends Equatable {
 }
 
 class PostsEventGet extends PostsEvent {
-  const PostsEventGet();
+  final String? userId;
+
+  const PostsEventGet({
+    this.userId,
+  });
 
   @override
-  List<Object?> get props => const [];
+  List<String?> get props => [userId];
 }
 
 class PostsEventGetNextPage extends PostsEvent {
   final int page;
+  final String? userId;
 
-  const PostsEventGetNextPage({required this.page});
+  const PostsEventGetNextPage({
+    required this.page,
+    this.userId,
+  });
 
   @override
   List<Object?> get props => [page];

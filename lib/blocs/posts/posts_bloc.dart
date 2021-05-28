@@ -24,7 +24,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
       final response = await Future.delayed(
         const Duration(seconds: 2),
-        () => postRepository.getPosts(page: 1),
+        () => postRepository.getPosts(page: 1, userId: event.userId),
       );
 
       yield SuccessPostsState(
@@ -38,7 +38,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
       final response = await Future.delayed(
         const Duration(seconds: 2),
-        () => postRepository.getPosts(page: event.page),
+        () => postRepository.getPosts(page: event.page, userId: event.userId),
       );
 
       yield (state as SuccessPostsState).mergeWith(
