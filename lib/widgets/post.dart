@@ -8,10 +8,12 @@ final DateFormat _formatTime = DateFormat('HH:mm');
 
 class PostCard extends StatelessWidget {
   final Post post;
+  final bool useFirstName;
 
   const PostCard({
     Key? key,
     required this.post,
+    this.useFirstName = true,
   }) : super(key: key);
 
   @override
@@ -43,6 +45,7 @@ class PostCard extends StatelessWidget {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
@@ -50,7 +53,7 @@ class PostCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          post.user.name,
+                          useFirstName ? post.user.firstName : post.user.name,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         Text(
