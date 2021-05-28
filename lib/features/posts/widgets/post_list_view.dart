@@ -22,7 +22,10 @@ class PostListView extends StatelessWidget {
             !state.isLoadingNextPage &&
             state.page < state.pages) {
           BlocProvider.of<PostsBloc>(context).add(
-            PostsEventGetNextPage(page: state.page + 1),
+            PostsEventGetNextPage(
+              page: state.page + 1,
+              userId: userId,
+            ),
           );
         }
         return true;
