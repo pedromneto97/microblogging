@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:microblogging/widgets/alert_widget.dart';
 
 import '../../../widgets/post.dart';
 import '../../blocs/news/news_bloc.dart';
+import '../../widgets/alert_widget.dart';
 
 class News extends StatelessWidget {
   const News();
