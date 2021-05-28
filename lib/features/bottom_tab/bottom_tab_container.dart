@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 
 import '../../blocs/authentication/authentication/authentication_bloc.dart';
+import '../../blocs/feed/feed_bloc.dart';
+import '../../blocs/news/news_bloc.dart';
+import '../../blocs/posts/posts_bloc.dart';
 import '../../repository/news_repository.dart';
 import '../../repository/post_repository.dart';
 import '../../utils/http_helper.dart';
@@ -10,9 +13,6 @@ import '../feed/feed.dart';
 import '../menu/menu.dart';
 import '../news/news.dart';
 import '../posts/posts.dart';
-import 'bloc/feed/feed_bloc.dart';
-import 'bloc/news/news_bloc.dart';
-import 'bloc/posts/posts_bloc.dart';
 
 class BottomTabContainer extends StatefulWidget {
   static const screenName = 'bottom_tab';

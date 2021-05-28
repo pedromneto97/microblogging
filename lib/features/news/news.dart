@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/post.dart';
-import '../bottom_tab/bloc/news/news_bloc.dart';
+import '../../blocs/news/news_bloc.dart';
 
 class News extends StatelessWidget {
   const News();

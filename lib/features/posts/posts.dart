@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/post.dart';
-import '../bottom_tab/bloc/posts/posts_bloc.dart';
+import '../../blocs/posts/posts_bloc.dart';
 
 class Posts extends StatelessWidget {
   const Posts();
