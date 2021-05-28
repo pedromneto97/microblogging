@@ -1,6 +1,8 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/post.dart';
+import '../models/user.dart';
 
 class PostRepository {
   const PostRepository._();
@@ -39,6 +41,32 @@ class PostRepository {
       pages: pages,
       posts: posts,
     );
+  }
+
+  Post createPost({required String text, required String userId}) {
+    final user = Hive.box<User>('users').values.firstWhere(
+          (user) => user.id == userId,
+        );
+    final post = Post(
+      id: const Uuid().v4(),
+      userId: userId,
+      dateTime: DateTime.now(),
+      text: text,
+      user: user,
+    );
+    Hive.box<Post>('posts').add(
+      post,
+    );
+    return post;
+  }
+
+  Post putPost({required String text, required String id}) {
+    final post = Hive.box<Post>('posts').values.firstWhere(
+          (post) => post.id == id,
+        );
+    post.text = text;
+    post.save();
+    return post;
   }
 }
 
