@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:microblogging/repository/post_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/authentication/authentication/authentication_bloc.dart';
@@ -49,11 +50,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthenticationRepository(
-        box: Hive.box<User>('users'),
-      ),
-      lazy: false,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => PostRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => AuthenticationRepository(
+            box: Hive.box<User>('users'),
+          ),
+          lazy: false,
+        ),
+      ],
       child: BlocProvider(
         create: (context) => AuthenticationBloc(
           authenticationRepository:

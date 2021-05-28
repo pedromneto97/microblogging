@@ -45,18 +45,10 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(
-          create: (context) => PostRepository(),
-          lazy: false,
-        ),
-        RepositoryProvider(
-          create: (context) =>
-              NewsRepository(httpHelper: HttpHelper(client: Client())),
-          lazy: false,
-        ),
-      ],
+    return RepositoryProvider(
+      create: (context) => NewsRepository(
+        httpHelper: HttpHelper(client: Client()),
+      ),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
