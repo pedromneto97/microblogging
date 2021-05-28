@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/authentication/authentication/authentication_bloc.dart';
 import '../../blocs/posts/posts_bloc.dart';
 import '../../repository/post_repository.dart';
+import 'post.dart';
 import 'widgets/post_list_view.dart';
 
 class MyPosts extends StatelessWidget {
@@ -31,7 +32,14 @@ class MyPosts extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const PostScreen(),
+                settings: const RouteSettings(name: PostScreen.screenName),
+              ),
+            );
+          },
           child: const Icon(Icons.add_rounded),
         ),
       ),
