@@ -22,4 +22,6 @@ class User extends HiveObject {
     required this.id,
     this.photoUrl,
   });
+
+  String get firstName => name.split(' ').first;
 }
