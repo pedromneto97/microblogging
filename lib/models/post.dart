@@ -4,6 +4,8 @@ import 'user.dart';
 
 part 'post.g.dart';
 
+///Post class. If user with an API, could split into two classes (Post and News)
+///But it extends [HiveObject], so it's not possible to extend another class
 @HiveType(typeId: 2)
 class Post extends HiveObject {
   @HiveField(0)
@@ -14,9 +16,14 @@ class Post extends HiveObject {
   final String text;
 
   @HiveField(3)
-  late User user;
+  final User user;
+
+  ///Represents the post id. It's not used on News.
+  @HiveField(4)
+  final String id;
 
   Post({
+    required this.id,
     required this.userId,
     required this.dateTime,
     required this.text,

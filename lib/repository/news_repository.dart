@@ -49,6 +49,7 @@ List<Post> _mapNews(String data) {
     );
 
     return Post(
+      id: '',
       userId: user.id,
       dateTime: DateTime.parse(e['message']['created_at']),
       text: e['message']['content'],

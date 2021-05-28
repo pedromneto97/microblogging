@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/post.dart';
 import '../models/user.dart';
@@ -38,8 +39,11 @@ void populateStorage() {
 
   userBox.addAll(users);
 
+  const uuid = Uuid();
+
   final posts = [
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(5).id,
       dateTime: DateTime(2021, 4, 27),
       text:
@@ -48,6 +52,7 @@ void populateStorage() {
       user: users.elementAt(5),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(0).id,
       dateTime: DateTime(2021, 5, 24, 17, 35),
       text:
@@ -56,6 +61,7 @@ void populateStorage() {
       user: users.elementAt(0),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(2).id,
       dateTime: DateTime(2021, 5, 24, 15, 40),
       text:
@@ -64,6 +70,7 @@ void populateStorage() {
       user: users.elementAt(2),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(3).id,
       dateTime: DateTime.now(),
       text:
@@ -72,6 +79,7 @@ void populateStorage() {
       user: users.elementAt(3),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(5).id,
       dateTime: DateTime(2021, 5, 7, 14, 15),
       text:
@@ -80,6 +88,7 @@ void populateStorage() {
       user: users.elementAt(5),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(1).id,
       dateTime: DateTime(2021, 03, 15, 22, 30),
       text:
@@ -88,6 +97,7 @@ void populateStorage() {
       user: users.elementAt(1),
     ),
     Post(
+      id: uuid.v4(),
       userId: users.elementAt(3).id,
       dateTime: DateTime(2021, 12, 25, 22, 30),
       text:

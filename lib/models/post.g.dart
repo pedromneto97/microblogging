@@ -17,6 +17,7 @@ class PostAdapter extends TypeAdapter<Post> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Post(
+      id: fields[4] as String,
       userId: fields[0] as String,
       dateTime: fields[1] as DateTime,
       text: fields[2] as String,
@@ -27,7 +28,7 @@ class PostAdapter extends TypeAdapter<Post> {
   @override
   void write(BinaryWriter writer, Post obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class PostAdapter extends TypeAdapter<Post> {
       ..writeByte(2)
       ..write(obj.text)
       ..writeByte(3)
-      ..write(obj.user);
+      ..write(obj.user)
+      ..writeByte(4)
+      ..write(obj.id);
   }
 
   @override
