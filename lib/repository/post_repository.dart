@@ -24,11 +24,17 @@ class PostRepository {
     return posts.toList();
   }
 
-  _GetPostsReturn getPosts({required int page, int pageLength = 4}) {
-    final box = Hive.box<Post>('posts');
-    final pages = (box.values.length / pageLength).ceil();
-    final posts =
-        box.values.skip((page - 1) * pageLength).take(pageLength).toList();
+  _GetPostsReturn getPosts({
+    required int page,
+    int pageLength = 4,
+    String? userId,
+  }) {
+    var box = Hive.box<Post>('posts').values;
+    final pages = (box.length / pageLength).ceil();
+    if (userId != null) {
+      box = box.where((element) => element.userId == userId);
+    }
+    final posts = box.skip((page - 1) * pageLength).take(pageLength).toList();
     return _GetPostsReturn(
       pages: pages,
       posts: posts,
