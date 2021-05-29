@@ -34,7 +34,7 @@ final theme = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
-      onSurface: Colors.white,
+      backgroundColor: Colors.white,
       minimumSize: const Size.fromHeight(48),
     ),
   ),
