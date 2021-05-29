@@ -32,10 +32,10 @@ class PostRepository {
     String? userId,
   }) {
     var box = Hive.box<Post>('posts').values;
-    final pages = (box.length / pageLength).ceil();
     if (userId != null) {
       box = box.where((element) => element.userId == userId);
     }
+    final pages = (box.length / pageLength).ceil();
     final posts = box.skip((page - 1) * pageLength).take(pageLength).toList();
     return _GetPostsReturn(
       pages: pages,
