@@ -1,9 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/authentication/authentication/authentication_bloc.dart';
-import '../authentication/login/login.dart';
 import '../posts/my_posts.dart';
+import 'widgets/logout_modal.dart';
 import 'widgets/menu_header.dart';
 import 'widgets/menu_tile.dart';
 
@@ -35,15 +34,10 @@ class Menu extends StatelessWidget {
           MenuTile(
             icon: Icons.logout_rounded,
             label: 'Sair',
-            onTap: () async {
-              await Navigator.of(context).pushNamedAndRemoveUntil(
-                Login.screenName,
-                (route) => route.settings.name == '/',
-              );
-              BlocProvider.of<AuthenticationBloc>(context).add(
-                const LogoutEvent(),
-              );
-            },
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => const LogoutModal(),
+            ),
           ),
           const Divider(
             thickness: 1,
