@@ -36,7 +36,6 @@ class News extends StatelessWidget {
             post: state.news[index],
             useFirstName: false,
           ),
-          itemExtent: 192,
           itemCount: state.news.length,
         );
       }
