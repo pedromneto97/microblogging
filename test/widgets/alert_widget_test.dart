@@ -7,19 +7,8 @@ import '../utils.dart';
 void main() {
   const color = Colors.red;
   const text = 'Test';
-  testWidgets('Alert widget base interface', (tester) async {
-    late BuildContext buildContext;
-    await tester.pumpWidget(
-      defaultMaterialApp(
-        Builder(
-          builder: (context) {
-            buildContext = context;
-            return const AlertWidget(iconColor: color, text: text);
-          },
-        ),
-      ),
-    );
-
+  void testBaseInterface(
+      {required WidgetTester tester, required BuildContext buildContext}) {
     final containerKeyFinder = find.byKey(const Key('AlertWidgetContainer'));
     expect(containerKeyFinder, findsOneWidget);
 
@@ -55,5 +44,56 @@ void main() {
 
     expect(textWidget.style, Theme.of(buildContext).textTheme.headline5);
     expect(textWidget.textAlign, TextAlign.center);
+  }
+
+  testWidgets('Alert widget base interface', (tester) async {
+    late BuildContext buildContext;
+    await tester.pumpWidget(
+      defaultMaterialApp(
+        Builder(
+          builder: (context) {
+            buildContext = context;
+            return const AlertWidget(iconColor: color, text: text);
+          },
+        ),
+      ),
+    );
+
+    testBaseInterface(tester: tester, buildContext: buildContext);
+
+    expect(find.byType(TextButton), findsNothing);
+  });
+
+  testWidgets('Test with on tap', (tester) async {
+    late BuildContext buildContext;
+    bool tapped = false;
+    await tester.pumpWidget(
+      defaultMaterialApp(
+        Builder(
+          builder: (context) {
+            buildContext = context;
+            return AlertWidget(
+              iconColor: color,
+              text: text,
+              onTap: () => tapped = !tapped,
+            );
+          },
+        ),
+      ),
+    );
+
+    testBaseInterface(tester: tester, buildContext: buildContext);
+
+    final textButtonFinder = find.byType(TextButton);
+    expect(textButtonFinder, findsOneWidget);
+
+    expect(
+      find.text('Aperte aqui para tentar novamente'.toUpperCase()),
+      findsOneWidget,
+    );
+
+    await tester.tap(textButtonFinder);
+
+    expect(tapped, isTrue);
   });
 }
