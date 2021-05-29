@@ -85,6 +85,9 @@ class _PostScreenState extends State<PostScreen> {
                 ),
                 BlocBuilder<PostCrudBloc, PostCrudState>(
                   builder: (context, state) {
+                    if (state is SuccessPostCrudState) {
+                      Navigator.of(context).pop();
+                    }
                     if (state is InProgressPostCrudState) {
                       return const ElevatedButton(
                         onPressed: null,
