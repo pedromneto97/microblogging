@@ -32,6 +32,9 @@ class PostRepository {
     String? userId,
   }) {
     var box = Hive.box<Post>('posts').values;
+    final sortBox = box.toList()
+      ..sort((a, b) => -a.dateTime.difference(b.dateTime).inMilliseconds);
+    box = sortBox;
     if (userId != null) {
       box = box.where((element) => element.userId == userId);
     }
