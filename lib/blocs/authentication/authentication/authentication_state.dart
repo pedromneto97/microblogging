@@ -28,7 +28,7 @@ class AuthenticationSuccessState extends AuthenticationState {
   });
 
   @override
-  List<Object?> get props => [user];
+  List<Object?> get props => [user.email, user.name];
 }
 
 class AuthenticationFailureState extends AuthenticationState {
