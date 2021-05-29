@@ -115,12 +115,7 @@ void main() {
             name: name,
           ),
         ).thenReturn(
-          User(
-            name: name,
-            id: const Uuid().v4(),
-            password: password,
-            email: email,
-          ),
+          user,
         );
         return bloc;
       },
