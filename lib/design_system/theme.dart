@@ -22,24 +22,20 @@ final theme = ThemeData(
   applyElevationOverlayColor: false,
   colorScheme: _colorScheme,
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      shape: MaterialStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
-      minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(48)),
+      minimumSize: const Size.fromHeight(48),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
-    style: ButtonStyle(
-      shape: MaterialStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+    style: OutlinedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(48)),
+      onSurface: Colors.white,
+      minimumSize: const Size.fromHeight(48),
     ),
   ),
   cardTheme: CardTheme(
