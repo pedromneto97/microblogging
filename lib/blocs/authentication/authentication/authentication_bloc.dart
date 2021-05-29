@@ -25,20 +25,24 @@ class AuthenticationBloc
     try {
       if (event is RegisterEvent) {
         yield const AuthenticationInProgressState();
-        await Future.delayed(const Duration(seconds: 2), () {});
-
-        final user = authenticationRepository.registerUser(
-          email: event.email,
-          password: event.password,
-          name: event.name,
+        final user = await Future.delayed(
+          const Duration(seconds: 2),
+          () => authenticationRepository.registerUser(
+            email: event.email,
+            password: event.password,
+            name: event.name,
+          ),
         );
+
         yield AuthenticationSuccessState(user: user);
       } else if (event is LoginEvent) {
         yield const AuthenticationInProgressState();
-        await Future.delayed(const Duration(seconds: 2), () {});
-        final user = authenticationRepository.login(
-          email: event.email,
-          password: event.password,
+        final user = await Future.delayed(
+          const Duration(seconds: 2),
+          () => authenticationRepository.login(
+            email: event.email,
+            password: event.password,
+          ),
         );
         yield AuthenticationSuccessState(user: user);
       } else if (event is LogoutEvent) {
