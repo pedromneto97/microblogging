@@ -70,12 +70,15 @@ class _BottomTabContainerState extends State<BottomTabContainer> {
         child: Scaffold(
           appBar: AppBar(
             title: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) => Text(
-                index == 0
-                    ? 'Bem vindo '
-                        '${(state as AuthenticationSuccessState).user.name}'
-                    : _titles.elementAt(index),
-              ),
+              builder: (context, state) {
+                return Text(
+                  index == 0
+                      ? 'Bem vindo '
+                          // ignore: lines_longer_than_80_chars
+                          '${(state as AuthenticationSuccessState).user.firstName}'
+                      : _titles.elementAt(index),
+                );
+              },
             ),
           ),
           body: _items.elementAt(index),
