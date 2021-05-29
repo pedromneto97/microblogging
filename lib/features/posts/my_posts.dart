@@ -27,6 +27,14 @@ class MyPosts extends StatelessWidget {
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) => PostListView(
                 userId: (state as AuthenticationSuccessState).user.id,
+                onTap: (post) => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PostScreen(
+                      post: post,
+                    ),
+                    settings: const RouteSettings(name: PostScreen.screenName),
+                  ),
+                ),
               ),
             ),
           ],

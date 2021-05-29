@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/posts/posts_bloc.dart';
+import '../../../models/post.dart';
 import '../../../widgets/alert_widget.dart';
 import '../../../widgets/post.dart';
 
 class PostListView extends StatelessWidget {
   final String? userId;
+  final void Function(Post post)? onTap;
 
   const PostListView({
     Key? key,
     this.userId,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -61,7 +64,11 @@ class PostListView extends StatelessWidget {
                       ),
                     );
                   }
-                  return PostCard(post: state.posts[index]);
+                  return PostCard(
+                    post: state.posts[index],
+                    onTap:
+                        onTap != null ? () => onTap!(state.posts[index]) : null,
+                  );
                 },
                 itemCount: state.isLoadingNextPage
                     ? state.posts.length + 1
