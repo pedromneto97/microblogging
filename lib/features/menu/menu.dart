@@ -35,8 +35,8 @@ class Menu extends StatelessWidget {
           MenuTile(
             icon: Icons.logout_rounded,
             label: 'Sair',
-            onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
+            onTap: () async {
+              await Navigator.of(context).pushNamedAndRemoveUntil(
                 Login.screenName,
                 (route) => route.settings.name == '/',
               );
