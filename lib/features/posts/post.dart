@@ -83,43 +83,60 @@ class _PostScreenState extends State<PostScreen> {
                     ),
                   ],
                 ),
-                BlocBuilder<PostCrudBloc, PostCrudState>(
-                  builder: (context, state) {
-                    if (state is SuccessPostCrudState) {
-                      Navigator.of(context).pop();
-                    }
-                    if (state is InProgressPostCrudState) {
-                      return const ElevatedButton(
-                        onPressed: null,
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          BlocProvider.of<PostCrudBloc>(context).add(
-                            widget.post == null
-                                ? PostCrudEventCreate(
-                                    text: _textEditingController.text,
-                                    userId:
-                                        (BlocProvider.of<AuthenticationBloc>(
-                                      context,
-                                    ).state as AuthenticationSuccessState)
-                                            .user
-                                            .id,
-                                  )
-                                : PostCrudEventEdit(
-                                    id: widget.post!.id,
-                                    text: _textEditingController.text,
-                                  ),
+                Column(
+                  children: [
+                    if (widget.post != null)
+                      Builder(
+                        builder: (context) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: OutlinedButton(
+                            onPressed: () =>
+                                BlocProvider.of<PostCrudBloc>(context).add(
+                              PostCrudEventRemove(id: widget.post!.id),
+                            ),
+                            child: const Text('APAGAR'),
+                          ),
+                        ),
+                      ),
+                    BlocBuilder<PostCrudBloc, PostCrudState>(
+                      builder: (context, state) {
+                        if (state is SuccessPostCrudState) {
+                          Navigator.of(context).pop();
+                        }
+                        if (state is InProgressPostCrudState) {
+                          return const ElevatedButton(
+                            onPressed: null,
+                            child: CircularProgressIndicator(),
                           );
                         }
+                        return ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              BlocProvider.of<PostCrudBloc>(context).add(
+                                widget.post == null
+                                    ? PostCrudEventCreate(
+                                        text: _textEditingController.text,
+                                        userId: (BlocProvider.of<
+                                                AuthenticationBloc>(
+                                          context,
+                                        ).state as AuthenticationSuccessState)
+                                            .user
+                                            .id,
+                                      )
+                                    : PostCrudEventEdit(
+                                        id: widget.post!.id,
+                                        text: _textEditingController.text,
+                                      ),
+                              );
+                            }
+                          },
+                          child: Text(
+                            widget.post == null ? 'PUBLICAR' : 'EDITAR',
+                          ),
+                        );
                       },
-                      child: Text(
-                        widget.post == null ? 'PUBLICAR' : 'EDITAR',
-                      ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ],
             ),
