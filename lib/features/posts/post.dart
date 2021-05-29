@@ -20,8 +20,16 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  late final TextEditingController _textEditingController;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController(
+      text: widget.post?.text,
+    );
+  }
 
   @override
   void dispose() {
