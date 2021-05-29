@@ -11,6 +11,11 @@ import '../mocks.dart';
 import '../utils.dart';
 
 void main() {
+  const email = 'teste@email.com';
+  const name = 'Pedro';
+  const password = '123456';
+  final id = const Uuid().v4();
+
   group('Test states', () {
     test('Initial state', () {
       const state = InitialAuthenticationState();
@@ -25,13 +30,15 @@ void main() {
     });
 
     test('Success state', () {
-      final user = User(name: 'Pedro', id: const Uuid().v4());
+      final user = User(name: name, id: id, email: email);
       final state = AuthenticationSuccessState(user: user);
 
       expect(state.user, user);
 
       expect(state.props.isNotEmpty, isTrue);
-      expect(state.props[0], user);
+      expect(state.props[0], user.email);
+      expect(state.props[1], user.name);
+      expect(state.props[2], user.id);
     });
 
     test('Failure state', () {
@@ -47,9 +54,6 @@ void main() {
 
   group('Test event', () {
     test('Register event', () {
-      const email = 'teste@email.com';
-      const name = 'Pedro';
-      const password = '123456';
       const state = RegisterEvent(name: name, email: email, password: password);
 
       expect(state.props.isNotEmpty, isTrue);
@@ -60,8 +64,6 @@ void main() {
     });
 
     test('Login event', () {
-      const email = 'teste@email.com';
-      const password = '123456';
       const state = LoginEvent(email: email, password: password);
 
       expect(state.props.isNotEmpty, isTrue);
@@ -80,12 +82,10 @@ void main() {
   group('Test bloc', () {
     late final AuthenticationRepository authenticationRepository;
     late AuthenticationBloc bloc;
-    const email = 'teste@email.com';
-    const name = 'Pedro';
-    const password = '123456';
+
     final user = User(
       name: name,
-      id: const Uuid().v4(),
+      id: id,
       password: password,
       email: email,
     );
