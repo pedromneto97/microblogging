@@ -15,9 +15,12 @@ class AlertWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key('AlertWidgetContainer'),
       padding: const EdgeInsets.all(8),
       child: Center(
+        key: const Key('AlertWidgetCenter'),
         child: Column(
+          key: const Key('AlertWidgetColumn'),
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -26,6 +29,7 @@ class AlertWidget extends StatelessWidget {
               size: 120,
             ),
             Padding(
+              key: const Key('AlertWidgetPadding'),
               padding: const EdgeInsets.only(top: 16.0, bottom: 8),
               child: Text(
                 text,
