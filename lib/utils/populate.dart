@@ -99,7 +99,7 @@ void populateStorage() {
     Post(
       id: uuid.v4(),
       userId: users.elementAt(3).id,
-      dateTime: DateTime(2021, 12, 25, 22, 30),
+      dateTime: DateTime(2020, 12, 25, 22, 30),
       text:
           // ignore: lines_longer_than_80_chars
           'pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu',
