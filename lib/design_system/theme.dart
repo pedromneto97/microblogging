@@ -52,4 +52,7 @@ final theme = ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     border: OutlineInputBorder(),
   ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: _colorScheme.primary,
+  ),
 );
