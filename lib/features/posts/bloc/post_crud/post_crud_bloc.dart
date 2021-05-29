@@ -41,6 +41,10 @@ class PostCrudBloc extends Bloc<PostCrudEvent, PostCrudState> {
       );
 
       yield const SuccessPostCrudState();
+    } else if (event is PostCrudEventRemove) {
+      postRepository.removePost(id: event.id);
+
+      yield const SuccessPostCrudState();
     }
   }
 }

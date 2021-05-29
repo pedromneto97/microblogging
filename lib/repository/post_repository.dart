@@ -68,6 +68,13 @@ class PostRepository {
     post.save();
     return post;
   }
+
+  void removePost({required String id}) {
+    final post = Hive.box<Post>('posts').values.firstWhere(
+          (post) => post.id == id,
+        );
+    post.delete();
+  }
 }
 
 class _GetPostsReturn {

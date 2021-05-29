@@ -30,3 +30,14 @@ class PostCrudEventEdit extends PostCrudEvent {
   @override
   List<String> get props => [id, text];
 }
+
+class PostCrudEventRemove extends PostCrudEvent {
+  final String id;
+
+  const PostCrudEventRemove({
+    required this.id,
+  });
+
+  @override
+  List<String> get props => [id];
+}
