@@ -66,7 +66,7 @@ void main() {
 
   testWidgets('Test with on tap', (tester) async {
     late BuildContext buildContext;
-    bool tapped = false;
+    var tapped = false;
     await tester.pumpWidget(
       defaultMaterialApp(
         Builder(
