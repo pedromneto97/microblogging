@@ -28,7 +28,7 @@ class PostRepository {
 
   _GetPostsReturn getPosts({
     required int page,
-    int pageLength = 4,
+    int pageLength = 5,
     String? userId,
   }) {
     var box = Hive.box<Post>('posts').values;
