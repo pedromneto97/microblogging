@@ -51,7 +51,7 @@ class AuthenticationBloc
 
   @override
   AuthenticationState? fromJson(Map<String, dynamic>? json) {
-    if (json != null) {
+    if (json != null && json.isNotEmpty) {
       return AuthenticationSuccessState(
         user: User(
           id: json['id'],
