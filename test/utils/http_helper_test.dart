@@ -4,12 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:microblogging/models/exceptions.dart';
 import 'package:microblogging/utils/http_helper.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'http_helper_test.mocks.dart';
+import '../mocks.dart';
 
-@GenerateMocks([Client])
 void main() {
   late final Client client;
   late final HttpHelper httpHelper;
@@ -34,7 +32,7 @@ void main() {
   test('get sucess', () async {
     const body = 'Teste';
     when(
-      client.get(
+      () => client.get(
         Uri.parse(url),
         headers: const {'Content-Type': 'application/json'},
       ),
@@ -47,7 +45,7 @@ void main() {
 
   test('Without internet connection', () async {
     when(
-      client.get(
+      () => client.get(
         Uri.parse(url),
         headers: const {'Content-Type': 'application/json'},
       ),
@@ -64,7 +62,7 @@ void main() {
   test('Bad request', () async {
     const body = 'Teste';
     when(
-      client.get(
+      () => client.get(
         Uri.parse(url),
         headers: const {'Content-Type': 'application/json'},
       ),
@@ -79,7 +77,7 @@ void main() {
   test('Server error', () async {
     const body = 'Teste';
     when(
-      client.get(
+      () => client.get(
         Uri.parse(url),
         headers: const {'Content-Type': 'application/json'},
       ),
