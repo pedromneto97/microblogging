@@ -1,5 +1,5 @@
 # microblogging
-[![Flutter](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml/badge.svg?branch=master)](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml)
+[![Flutter](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml/badge.svg?branch=master)](https://github.com/pedromneto97/microblogging/actions/workflows/flutter.yml) [![codecov](https://codecov.io/gh/pedromneto97/microblogging/branch/master/graph/badge.svg?token=ftfx8nJMgE)](https://codecov.io/gh/pedromneto97/microblogging)
 
 A microblogging app
 
