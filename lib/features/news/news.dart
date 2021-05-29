@@ -32,7 +32,10 @@ class News extends StatelessWidget {
       }
       if (state is SuccessNewsState) {
         return ListView.builder(
-          itemBuilder: (context, index) => PostCard(post: state.news[index]),
+          itemBuilder: (context, index) => PostCard(
+            post: state.news[index],
+            useFirstName: false,
+          ),
           itemExtent: 192,
           itemCount: state.news.length,
         );
