@@ -48,7 +48,10 @@ class MyPosts extends StatelessWidget {
               ),
             );
           },
-          child: const Icon(Icons.add_rounded),
+          child: const Icon(
+            Icons.add_rounded,
+            color: Colors.white,
+          ),
         ),
       ),
     );
