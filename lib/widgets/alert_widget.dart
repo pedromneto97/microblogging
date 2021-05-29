@@ -6,11 +6,10 @@ class AlertWidget extends StatelessWidget {
   final void Function()? onTap;
 
   const AlertWidget({
-    Key? key,
     required this.iconColor,
     required this.text,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
