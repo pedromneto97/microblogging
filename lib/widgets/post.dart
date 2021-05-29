@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/post.dart';
+import '../utils/date_utils.dart';
 
 final DateFormat _formatDateTime = DateFormat("dd 'de' MMM 'às' HH:mm");
 final DateFormat _formatTime = DateFormat('HH:mm');
@@ -61,7 +62,7 @@ class PostCard extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
-                            DateTime.now().difference(post.dateTime).inDays > 0
+                            !isToday(post.dateTime)
                                 ? _formatDateTime.format(post.dateTime)
                                 : _formatTime.format(post.dateTime),
                             style: Theme.of(context).textTheme.caption,
