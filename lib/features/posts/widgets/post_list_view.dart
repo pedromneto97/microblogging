@@ -54,25 +54,34 @@ class PostListView extends StatelessWidget {
                   text: 'Ops, parece que não há nenhuma publicação',
                 );
               }
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  if (state.isLoadingNextPage && index == state.posts.length) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }
-                  return PostCard(
-                    post: state.posts[index],
-                    onTap:
-                        onTap != null ? () => onTap!(state.posts[index]) : null,
+              return RefreshIndicator(
+                onRefresh: () async {
+                  BlocProvider.of<PostsBloc>(context).add(
+                    PostsEventGet(userId: userId),
                   );
                 },
-                itemCount: state.isLoadingNextPage
-                    ? state.posts.length + 1
-                    : state.posts.length,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    if (state.isLoadingNextPage &&
+                        index == state.posts.length) {
+                      return const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return PostCard(
+                      post: state.posts[index],
+                      onTap: onTap != null
+                          ? () => onTap!(state.posts[index])
+                          : null,
+                    );
+                  },
+                  itemCount: state.isLoadingNextPage
+                      ? state.posts.length + 1
+                      : state.posts.length,
+                ),
               );
             }
 
