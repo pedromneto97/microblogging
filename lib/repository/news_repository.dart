@@ -55,5 +55,6 @@ List<Post> _mapNews(String data) {
       text: e['message']['content'],
       user: user,
     );
-  }).toList();
+  }).toList()
+    ..sort((a, b) => -a.dateTime.difference(b.dateTime).inMilliseconds);
 }
