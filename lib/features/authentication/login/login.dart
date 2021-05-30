@@ -89,93 +89,100 @@ class _LoginState extends State<Login> {
                 });
           }
         },
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height,
-            ),
-            child: Container(
-              margin: const EdgeInsets.all(16),
-              child: Form(
-                key: _formKey,
-                child: AutofillGroup(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Image.asset(
-                          'lib/assets/images/logo.webp',
-                          height: 304,
-                          width: 304,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: TextFormField(
-                                controller: _emailTextEditingController,
-                                decoration: const InputDecoration(
-                                  labelText: 'E-mail',
-                                  hintText: 'pedromneto97@gmail.com',
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight,
+                ),
+                child: Container(
+                  margin: const EdgeInsets.all(16),
+                  child: Form(
+                    key: _formKey,
+                    child: AutofillGroup(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Image.asset(
+                              'lib/assets/images/logo.webp',
+                              height: 304,
+                              width: 304,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: TextFormField(
+                                    controller: _emailTextEditingController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'E-mail',
+                                      hintText: 'pedromneto97@gmail.com',
+                                    ),
+                                    autofillHints: const [AutofillHints.email],
+                                    keyboardType: TextInputType.emailAddress,
+                                    validator: (value) {
+                                      if (value == null ||
+                                          !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+                                              .hasMatch(value)) {
+                                        return 'Insira um e-mail válido';
+                                      }
+                                      return null;
+                                    },
+                                    textInputAction: TextInputAction.next,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                  ),
                                 ),
-                                autofillHints: const [AutofillHints.email],
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value == null ||
-                                      !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-                                          .hasMatch(value)) {
-                                    return 'Insira um e-mail válido';
-                                  }
-                                  return null;
-                                },
-                                textInputAction: TextInputAction.next,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
+                                PasswordInput(
+                                  controller: _passwordTextEditingController,
+                                  onSubmit: (_) => login(),
+                                ),
+                              ],
                             ),
-                            PasswordInput(
-                              controller: _passwordTextEditingController,
-                              onSubmit: (_) => login(),
+                          ),
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) => Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        state is AuthenticationInProgressState
+                                            ? null
+                                            : login,
+                                    child:
+                                        state is AuthenticationInProgressState
+                                            ? const CircularProgressIndicator()
+                                            : Text(
+                                                'ENTRAR'.toUpperCase(),
+                                              ),
+                                  ),
+                                ),
+                                OutlinedButton(
+                                  onPressed:
+                                      state is AuthenticationInProgressState
+                                          ? null
+                                          : () => Navigator.of(context)
+                                              .pushNamed(Register.screenName),
+                                  child: Text(
+                                    'Registrar'.toUpperCase(),
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                        builder: (context, state) => Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: ElevatedButton(
-                                onPressed:
-                                    state is AuthenticationInProgressState
-                                        ? null
-                                        : login,
-                                child: state is AuthenticationInProgressState
-                                    ? const CircularProgressIndicator()
-                                    : Text(
-                                        'ENTRAR'.toUpperCase(),
-                                      ),
-                              ),
-                            ),
-                            OutlinedButton(
-                              onPressed: state is AuthenticationInProgressState
-                                  ? null
-                                  : () => Navigator.of(context)
-                                      .pushNamed(Register.screenName),
-                              child: Text(
-                                'Registrar'.toUpperCase(),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

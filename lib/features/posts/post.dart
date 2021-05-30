@@ -60,105 +60,110 @@ class _PostScreenState extends State<PostScreen> {
               );
             }
           },
-          child: LayoutBuilder(
-            builder: (context, constraints) => SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 24.0),
-                              child: Text(
-                                'O que você está pensando?'.toUpperCase(),
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _textEditingController,
-                              decoration: const InputDecoration(
-                                labelText: 'Texto',
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                              ),
-                              maxLines: 7,
-                              maxLength: 280,
-                              validator: (value) {
-                                if (value == null || value.length < 3) {
-                                  return 'O texto é obrigatório';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            if (widget.post != null)
-                              Builder(
-                                builder: (context) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: OutlinedButton(
-                                    onPressed: () =>
-                                        BlocProvider.of<PostCrudBloc>(context)
-                                            .add(
-                                      PostCrudEventRemove(id: widget.post!.id),
-                                    ),
-                                    child: const Text('APAGAR'),
-                                  ),
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 24.0),
+                                child: Text(
+                                  'O que você está pensando?'.toUpperCase(),
+                                  style: Theme.of(context).textTheme.bodyText1,
                                 ),
                               ),
-                            BlocBuilder<PostCrudBloc, PostCrudState>(
-                              builder: (context, state) {
-                                if (state is InProgressPostCrudState) {
-                                  return const ElevatedButton(
-                                    onPressed: null,
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                return ElevatedButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      BlocProvider.of<PostCrudBloc>(context)
-                                          .add(
-                                        widget.post == null
-                                            ? PostCrudEventCreate(
-                                                text:
-                                                    _textEditingController.text,
-                                                userId: (BlocProvider.of<
-                                                        AuthenticationBloc>(
-                                                  context,
-                                                  // ignore: lines_longer_than_80_chars
-                                                ).state as AuthenticationSuccessState)
-                                                    .user
-                                                    .id,
-                                              )
-                                            : PostCrudEventEdit(
-                                                id: widget.post!.id,
-                                                text:
-                                                    _textEditingController.text,
-                                              ),
-                                      );
-                                    }
-                                  },
-                                  child: Text(
-                                    widget.post == null ? 'PUBLICAR' : 'EDITAR',
+                              TextFormField(
+                                controller: _textEditingController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Texto',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                ),
+                                maxLines: 7,
+                                maxLength: 280,
+                                validator: (value) {
+                                  if (value == null || value.length < 3) {
+                                    return 'O texto é obrigatório';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              if (widget.post != null)
+                                Builder(
+                                  builder: (context) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: OutlinedButton(
+                                      onPressed: () =>
+                                          BlocProvider.of<PostCrudBloc>(context)
+                                              .add(
+                                        PostCrudEventRemove(
+                                            id: widget.post!.id),
+                                      ),
+                                      child: const Text('APAGAR'),
+                                    ),
                                   ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                                ),
+                              BlocBuilder<PostCrudBloc, PostCrudState>(
+                                builder: (context, state) {
+                                  if (state is InProgressPostCrudState) {
+                                    return const ElevatedButton(
+                                      onPressed: null,
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        BlocProvider.of<PostCrudBloc>(context)
+                                            .add(
+                                          widget.post == null
+                                              ? PostCrudEventCreate(
+                                                  text: _textEditingController
+                                                      .text,
+                                                  userId: (BlocProvider.of<
+                                                          AuthenticationBloc>(
+                                                    context,
+                                                    // ignore: lines_longer_than_80_chars
+                                                  ).state as AuthenticationSuccessState)
+                                                      .user
+                                                      .id,
+                                                )
+                                              : PostCrudEventEdit(
+                                                  id: widget.post!.id,
+                                                  text: _textEditingController
+                                                      .text,
+                                                ),
+                                        );
+                                      }
+                                    },
+                                    child: Text(
+                                      widget.post == null
+                                          ? 'PUBLICAR'
+                                          : 'EDITAR',
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

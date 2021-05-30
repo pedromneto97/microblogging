@@ -95,56 +95,35 @@ class _RegisterState extends State<Register> {
                 });
           }
         },
-        child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: constraints.maxHeight,
-              ),
-              child: Container(
-                margin: const EdgeInsets.all(16),
-                child: Form(
-                  key: _formKey,
-                  child: AutofillGroup(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextFormField(
-                              controller: _nameTextEditingController,
-                              decoration: const InputDecoration(
-                                labelText: 'Nome',
-                              ),
-                              autofillHints: const [AutofillHints.name],
-                              keyboardType: TextInputType.text,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'O nome é obrigatório';
-                                }
-                                return null;
-                              },
-                              textInputAction: TextInputAction.next,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: TextFormField(
-                                controller: _emailTextEditingController,
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight,
+                ),
+                child: Container(
+                  margin: const EdgeInsets.all(16),
+                  child: Form(
+                    key: _formKey,
+                    child: AutofillGroup(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextFormField(
+                                controller: _nameTextEditingController,
                                 decoration: const InputDecoration(
-                                  labelText: 'E-mail',
+                                  labelText: 'Nome',
                                 ),
-                                autofillHints: const [AutofillHints.email],
-                                keyboardType: TextInputType.emailAddress,
+                                autofillHints: const [AutofillHints.name],
+                                keyboardType: TextInputType.text,
                                 validator: (value) {
-                                  if (value == null ||
-                                      !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-                                          .hasMatch(value)) {
-                                    return 'Insira um e-mail válido';
+                                  if (value == null || value.isEmpty) {
+                                    return 'O nome é obrigatório';
                                   }
                                   return null;
                                 },
@@ -152,27 +131,50 @@ class _RegisterState extends State<Register> {
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                               ),
-                            ),
-                            PasswordInput(
-                              controller: _passwordTextEditingController,
-                              isNewPasswordInput: true,
-                              onSubmit: (_) => submit(),
-                            ),
-                          ],
-                        ),
-                        BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                          builder: (context, state) => ElevatedButton(
-                            onPressed: state is AuthenticationInProgressState
-                                ? null
-                                : submit,
-                            child: state is AuthenticationInProgressState
-                                ? const CircularProgressIndicator()
-                                : Text(
-                                    'REGISTRAR'.toUpperCase(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
+                                child: TextFormField(
+                                  controller: _emailTextEditingController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'E-mail',
                                   ),
+                                  autofillHints: const [AutofillHints.email],
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    if (value == null ||
+                                        !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+                                            .hasMatch(value)) {
+                                      return 'Insira um e-mail válido';
+                                    }
+                                    return null;
+                                  },
+                                  textInputAction: TextInputAction.next,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                ),
+                              ),
+                              PasswordInput(
+                                controller: _passwordTextEditingController,
+                                isNewPasswordInput: true,
+                                onSubmit: (_) => submit(),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) => ElevatedButton(
+                              onPressed: state is AuthenticationInProgressState
+                                  ? null
+                                  : submit,
+                              child: state is AuthenticationInProgressState
+                                  ? const CircularProgressIndicator()
+                                  : Text(
+                                      'REGISTRAR'.toUpperCase(),
+                                    ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
