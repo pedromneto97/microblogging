@@ -30,7 +30,7 @@ const _items = [
   Menu(),
 ];
 
-const _titles = ['', 'O que as pessoas andam vendo', 'Últimas notícias', ''];
+const _titles = ['', 'Publicações', 'Últimas notícias', ''];
 
 class _BottomTabContainerState extends State<BottomTabContainer> {
   int index = 0;
