@@ -99,11 +99,10 @@ class _LoginState extends State<Login> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Center(
-                      child: Text(
-                        'SEU BLOG',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
+                    child: Image.asset(
+                      'lib/assets/images/logo.webp',
+                      height: 304,
+                      width: 304,
                     ),
                   ),
                   Expanded(
