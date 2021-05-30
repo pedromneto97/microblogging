@@ -137,6 +137,7 @@ class _PostScreenState extends State<PostScreen> {
                                                 userId: (BlocProvider.of<
                                                         AuthenticationBloc>(
                                                   context,
+                                                  // ignore: lines_longer_than_80_chars
                                                 ).state as AuthenticationSuccessState)
                                                     .user
                                                     .id,
