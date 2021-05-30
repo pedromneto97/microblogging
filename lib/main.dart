@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
         lazy: false,
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => MaterialApp(
-            title: 'Seu blog',
+            title: 'Seu Blog',
             theme: theme,
             initialRoute: state is AuthenticationSuccessState
                 ? BottomTabContainer.screenName
