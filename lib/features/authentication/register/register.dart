@@ -120,7 +120,7 @@ class _RegisterState extends State<Register> {
                                   labelText: 'Nome',
                                 ),
                                 autofillHints: const [AutofillHints.name],
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.name,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'O nome é obrigatório';
