@@ -132,5 +132,145 @@ void main() {
       ],
       wait: const Duration(seconds: 3),
     );
+
+    const userAlreadyExistsException = UserAlreadyExists(
+      message: 'Usuário já cadastrado',
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'Register event failure',
+      build: () {
+        when(
+          () => authenticationRepository.registerUser(
+            email: email,
+            password: password,
+            name: name,
+          ),
+        ).thenThrow(
+          userAlreadyExistsException,
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        const RegisterEvent(
+          name: name,
+          email: email,
+          password: password,
+        ),
+      ),
+      expect: () => const [
+        AuthenticationInProgressState(),
+        AuthenticationFailureState(exception: userAlreadyExistsException),
+      ],
+      wait: const Duration(seconds: 3),
+    );
+
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'Login event success',
+      build: () {
+        when(
+          () => authenticationRepository.login(
+            email: email,
+            password: password,
+          ),
+        ).thenReturn(
+          user,
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        const LoginEvent(
+          email: email,
+          password: password,
+        ),
+      ),
+      expect: () => [
+        const AuthenticationInProgressState(),
+        AuthenticationSuccessState(user: user)
+      ],
+      wait: const Duration(seconds: 3),
+    );
+
+    const userDoesNotExistsException = UserDoesNotExists(
+      message: 'Usuário não cadastrado',
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'Login event failure',
+      build: () {
+        when(
+          () => authenticationRepository.login(
+            email: email,
+            password: password,
+          ),
+        ).thenThrow(
+          userDoesNotExistsException,
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        const LoginEvent(
+          email: email,
+          password: password,
+        ),
+      ),
+      expect: () => const [
+        AuthenticationInProgressState(),
+        AuthenticationFailureState(exception: userDoesNotExistsException),
+      ],
+      wait: const Duration(seconds: 3),
+    );
+
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'Logout event',
+      build: () => bloc,
+      act: (bloc) => bloc.add(
+        const LogoutEvent(),
+      ),
+      expect: () => const [
+        InitialAuthenticationState(),
+      ],
+      seed: () => AuthenticationSuccessState(user: user),
+      wait: const Duration(seconds: 3),
+    );
+
+    group('fromJson', () {
+      test('valid json', () {
+        final map = {
+          'id': id,
+          'email': email,
+          'password': password,
+          'name': name,
+          'photoUrl': null
+        };
+        expect(bloc.fromJson(map), AuthenticationSuccessState(user: user));
+      });
+
+      test('null json', () {
+        expect(bloc.fromJson(null), isNull);
+      });
+
+      test('empty json', () {
+        expect(bloc.fromJson(const {}), isNull);
+      });
+    });
+
+    group('toJson', () {
+      test('authenticated', () {
+        final map = {
+          'id': id,
+          'email': email,
+          'password': password,
+          'name': name,
+          'photoUrl': null
+        };
+        expect(
+          bloc.toJson(AuthenticationSuccessState(user: user)),
+          map,
+        );
+      });
+
+      test('not authenticated', () {
+        expect(bloc.toJson(const AuthenticationInProgressState()), isNull);
+      });
+    });
   });
 }
